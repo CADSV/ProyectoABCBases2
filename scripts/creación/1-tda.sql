@@ -219,3 +219,87 @@ CREATE OR REPLACE TYPE BODY DATOS AS
 END;
 
 /
+
+CREATE OR REPLACE TYPE FECHA AS OBJECT(
+    fecha_inicio DATE,
+    fecha_fin DATE,
+    cantidad_dias NUMBER,
+    STATIC FUNCTION validarFechas ( fecha_inicio DATE, fecha_fin DATE ) RETURN NUMBER,
+    STATIC FUNCTION cantidadDeDias ( fecha_inicio DATE, fecha_fin DATE ) RETURN NUMBER,
+    CONSTRUCTOR FUNCTION FECHA ( fecha_inicio DATE, fecha_fin DATE ) RETURN SELF AS RESULT
+);
+
+/
+
+CREATE OR REPLACE TYPE BODY FECHA AS
+    STATIC FUNCTION validarFechas ( fecha_inicio DATE, fecha_fin DATE ) RETURN NUMBER
+    IS
+    BEGIN
+        IF ((fecha_inicio > fecha_fin) OR (fecha_inicio = NULL) OR (fecha_fin = NULL)) THEN
+            RAISE_APPLICATION_ERROR(-20001,'Formato de fechas inválido');
+            RETURN 0;
+        ELSE
+            RETURN 1;
+        END IF;
+    END;
+
+
+    STATIC FUNCTION cantidadDeDias ( fecha_inicio DATE, fecha_fin DATE ) RETURN NUMBER
+    IS
+    BEGIN
+        RETURN fecha_fin - fecha_inicio + 1;
+    END;
+  
+    CONSTRUCTOR FUNCTION FECHA ( fecha_inicio DATE, fecha_fin DATE ) RETURN SELF AS RESULT
+    IS
+    BEGIN
+        IF (FECHA.validarFechas(fecha_inicio, fecha_fin) = 1) THEN
+            SELF.fecha_inicio := fecha_inicio;
+            SELF.fecha_fin := fecha_fin;
+            SELF.cantidad_dias := FECHA.cantidadDeDias(fecha_inicio, fecha_fin);
+            RETURN;
+        END IF;
+    END;
+END;
+
+/
+
+CREATE OR REPLACE TYPE PRECIO AS OBJECT(
+    precio_total NUMBER,
+    
+    STATIC FUNCTION validarCantidad (cantidad NUMBER) RETURN NUMBER,
+    MEMBER PROCEDURE sumarPrecio (precio NUMBER),
+    CONSTRUCTOR FUNCTION PRECIO (precio_base NUMBER) RETURN SELF AS RESULT
+);
+
+/
+
+CREATE OR REPLACE TYPE BODY PRECIO AS
+    STATIC FUNCTION validarCantidad (cantidad NUMBER) RETURN NUMBER
+    IS
+    BEGIN
+        IF(cantidad >= 0) THEN
+            RETURN 1;
+        ELSE
+            RAISE_APPLICATION_ERROR(-20016,'Error. La cantidad no puede ser negativa');
+            RETURN 0;
+        END IF;
+    END;
+
+    MEMBER PROCEDURE sumarPrecio (precio NUMBER)
+    IS
+    BEGIN
+        UPDATE PAQUETE_TURISTICO pt SET pt.paq_precio.precio_total = SELF.precio_total + precio WHERE pt.paq_precio = SELF;
+    END;
+
+    CONSTRUCTOR FUNCTION PRECIO (precio_base NUMBER) RETURN SELF AS RESULT
+    IS
+    BEGIN
+        IF(PRECIO.validarCantidad(precio_base) = 1) THEN
+            SELF.precio_total := precio_base;
+            RETURN;
+        END IF;
+    END;
+END;
+
+/

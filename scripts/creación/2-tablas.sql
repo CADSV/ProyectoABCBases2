@@ -2,7 +2,7 @@
 
 CREATE TABLE TRANSPORTE(
     tra_id NUMBER PRIMARY KEY,
-    tra_foto BLOB NOT NULL,
+    tra_foto BLOB DEFAULT EMPTY_BLOB(),
     tra_nombre VARCHAR2(40) NOT NULL
 );
 
@@ -34,8 +34,8 @@ CREATE TABLE TERRESTRE(
 CREATE TABLE DESTINO_TURISTICO(
     des_id NUMBER PRIMARY KEY,
     des_nombre VARCHAR2(40) NOT NULL,
-    des_foto BLOB NOT NULL,
-    des_video BLOB NOT NULL,
+    des_foto BLOB DEFAULT EMPTY_BLOB(),
+    des_video BLOB DEFAULT EMPTY_BLOB(),
     des_descripcion VARCHAR2(200) NOT NULL
 );
 
@@ -46,7 +46,7 @@ CREATE TABLE DESTINO_TURISTICO(
 CREATE TABLE PAIS (
     pai_id NUMBER PRIMARY KEY NOT NULL,
     pai_nombre VARCHAR2(40) NOT NULL,
-    pai_bandera BLOB NOT NULL
+    pai_bandera BLOB DEFAULT EMPTY_BLOB()
 );
 
 /
@@ -56,7 +56,7 @@ CREATE TABLE PAIS (
 CREATE TABLE EMPRESA (
     emp_id NUMBER PRIMARY KEY NOT NULL,
     emp_nombre VARCHAR2(40) NOT NULL,
-    emp_logo BLOB NOT NULL
+    emp_logo BLOB DEFAULT EMPTY_BLOB()
 );
 
 /
@@ -153,7 +153,7 @@ CREATE TABLE FAMILIAR(
 CREATE TABLE SERVICIO(
     ser_id NUMBER PRIMARY KEY NOT NULL,
     ser_nombre VARCHAR2(40) NOT NULL,
-    ser_foto BLOB NOT NULL,
+    ser_foto BLOB DEFAULT EMPTY_BLOB(),
     ser_costo_mensual NUMBER NOT NULL,
     ser_precio_unitario NUMBER NOT NULL,
     ser_duracion NUMBER,
