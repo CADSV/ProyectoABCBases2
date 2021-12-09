@@ -302,3 +302,34 @@ CREATE TABLE PERTENENCIA(
 );
 
 /
+
+--Para poder crear blobs, despues del AS se debe colocar la direccion donde tienen la imagen
+
+--ALEJANDRO:
+/*
+CREATE OR REPLACE DIRECTORY IMAGES AS 'C:\Users\user\Desktop\Alejandro\Universidad\Sistemas de Bases de Datos II\Proyecto\ProyectoABCBases2\images';
+*/
+
+--CARLOS:
+/*
+CREATE OR REPLACE DIRECTORY IMAGES AS '';
+*/
+
+/*
+GRANT READ, WRITE ON DIRECTORY IMAGES TO system;
+*/
+
+--Prueba insertando una imagen en una tabla:
+/*
+SET serveroutput ON
+DECLARE 
+    V_blob BLOB;
+    V_bfile BFILE;
+BEGIN 
+    INSERT INTO PAIS VALUES (pai_id.nextVal,'Venezuela',EMPTY_BLOB()) RETURNING foto INTO V_blob;
+    V_bfile := BFILENAME('IMAGES', 'venezuela.png');
+    DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
+    DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
+   COMMIT;
+END;
+*/
