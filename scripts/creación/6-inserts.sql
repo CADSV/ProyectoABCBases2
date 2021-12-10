@@ -16,6 +16,7 @@ INSERT INTO TRANSPORTE VALUES (14, EMPTY_BLOB(), 'Oracle');
 INSERT INTO TRANSPORTE VALUES (15, EMPTY_BLOB(), 'Bismark');
 
 
+
 INSERT INTO TRANSPORTE VALUES (16, EMPTY_BLOB(), 'Unidad I');
 INSERT INTO TRANSPORTE VALUES (17, EMPTY_BLOB(), 'Unidad II');
 INSERT INTO TRANSPORTE VALUES (18, EMPTY_BLOB(), 'Unidad III');
@@ -35,7 +36,7 @@ INSERT INTO TRANSPORTE VALUES (30, EMPTY_BLOB(), 'Unidad XV');
 
 /* INSERTS DE CRUCERO */
 
-INSERT INTO CRUCERO VALUES (1,'09-12-2021');
+INSERT INTO CRUCERO VALUES (1, TDA_MANTENIMIENTO.fecha_prox_mant('09-12-2021'));
 INSERT INTO CRUCERO VALUES (2,'12-11-2021');
 INSERT INTO CRUCERO VALUES (3,'01-11-2020');
 INSERT INTO CRUCERO VALUES (4,'28-10-2020');
@@ -78,16 +79,17 @@ INSERT INTO DESTINO_TURISTICO VALUES(2,'La Orchila',EMPTY_BLOB(), EMPTY_BLOB(), 
 INSERT INTO DESTINO_TURISTICO VALUES(3,'Los Frailes',EMPTY_BLOB(), EMPTY_BLOB(), 'Hermosos atardeceres y playas cristalinas.');
 INSERT INTO DESTINO_TURISTICO VALUES(4,'Los Testigos',EMPTY_BLOB(), EMPTY_BLOB(), 'Desde aquí puedes ver las Antillas Neerlandesas.');
 INSERT INTO DESTINO_TURISTICO VALUES(5,'Las Aves',EMPTY_BLOB(), EMPTY_BLOB(), 'Playas sabrosas y peculiares, con diferentes tonalidades de arena.');
-INSERT INTO DESTINO_TURISTICO VALUES(6,'Tucacas',EMPTY_BLOB(), EMPTY_BLOB(), 'Hasta el Presidente tiene una casa en este hermoso lugar.');
-INSERT INTO DESTINO_TURISTICO VALUES(7,'Choroní',EMPTY_BLOB(), EMPTY_BLOB(), 'Si quieres tomarte increíbles fotos playeras, Choroní con sus playas y casco histórico, es el lugar.');
-INSERT INTO DESTINO_TURISTICO VALUES(8,'Tuja',EMPTY_BLOB(), EMPTY_BLOB(), 'Puedes llegar caminando desde la Colonia Tovar si quieres una aventura diferente.');
-INSERT INTO DESTINO_TURISTICO VALUES(9,'Punta Araya',EMPTY_BLOB(), EMPTY_BLOB(), 'Una de las dos puntas del Estado Sucre, con mucho atractivo turístico.');
-INSERT INTO DESTINO_TURISTICO VALUES(10,'La Blanquilla',EMPTY_BLOB(), EMPTY_BLOB(), 'Con arena blanca y pura.');
-INSERT INTO DESTINO_TURISTICO VALUES(11,'La Tortuga',EMPTY_BLOB(), EMPTY_BLOB(), 'Su nombre lo recibe de su peculiar figura, podrás hacer muchas actividades divertidas aquí.');
-INSERT INTO DESTINO_TURISTICO VALUES(12,'Cepe',EMPTY_BLOB(), EMPTY_BLOB(), 'Perfecta para pasar el fin de semana en familia.');
-INSERT INTO DESTINO_TURISTICO VALUES(13,'Cata',EMPTY_BLOB(), EMPTY_BLOB(), 'Hermosa Bahía, de tradición pesquera y turística.');
-INSERT INTO DESTINO_TURISTICO VALUES(14,'Chichiriviche',EMPTY_BLOB(), EMPTY_BLOB(), 'El lugar perfecto para reunirte con los panas y festejar hasta que el alma de.');
-INSERT INTO DESTINO_TURISTICO VALUES(15,'Puerto Cabello',EMPTY_BLOB(), EMPTY_BLOB(), 'Si te quieres bañar en un puerto, este es tu lugar.');
+INSERT INTO DESTINO_TURISTICO VALUES(6,'La Tortuga',EMPTY_BLOB(), EMPTY_BLOB(), 'Su nombre lo recibe de su peculiar figura, podrás hacer muchas actividades divertidas aquí.');
+INSERT INTO DESTINO_TURISTICO VALUES(7,'Morrocoy',EMPTY_BLOB(), EMPTY_BLOB(), 'Decenas de increíbles y paradisíacos cayos llenos de sabrosas y cristalinas playas con corales.');
+INSERT INTO DESTINO_TURISTICO VALUES(8,'Canaima',EMPTY_BLOB(), EMPTY_BLOB(), 'El Parque Nacional más importante de Venezuela, con con los tepuyes más antiguos y la cascada más alta del planeta.');
+INSERT INTO DESTINO_TURISTICO VALUES(9,'Henri Pittier',EMPTY_BLOB(), EMPTY_BLOB(), 'Lleno de senderos, cuevas y playas que se pueden visitar y disfrutar.');
+INSERT INTO DESTINO_TURISTICO VALUES(10,'Sierra Nevada',EMPTY_BLOB(), EMPTY_BLOB(), 'Los picos más altos de Venezuela, llenos de nieve, misticismo e ilusión por descubrir esta maravillosa región.');
+INSERT INTO DESTINO_TURISTICO VALUES(11,'Naiguatá',EMPTY_BLOB(), EMPTY_BLOB(), 'El Pico más alto de la Cordillera de la Costa, con 2765 msnm, puedes ver toda la Ciudad Capital, y el Estado Vargas.');
+INSERT INTO DESTINO_TURISTICO VALUES(12,'Médanos de Coro',EMPTY_BLOB(), EMPTY_BLOB(), 'Si quieres dunas, arenas y un paisaje árido, este es el lugar perfecto.');
+INSERT INTO DESTINO_TURISTICO VALUES(13,'Cuevas del Guácharo',EMPTY_BLOB(), EMPTY_BLOB(), 'Cuevas llenas de misterios, oscuridad y murciélagos.');
+INSERT INTO DESTINO_TURISTICO VALUES(14,'Sierra de Perijá',EMPTY_BLOB(), EMPTY_BLOB(), 'Hermoso Parque lleno de selvas, montañas y amigables comunidades indígenas.');
+INSERT INTO DESTINO_TURISTICO VALUES(15,'Catatumbo',EMPTY_BLOB(), EMPTY_BLOB(), 'Aquí ocurre uno de los fenómenos naturales más impresionantes del mundo, con cientos de rayos.');
+
 
 
 /* INSERTS DE PAIS */
@@ -107,3 +109,77 @@ INSERT INTO PAIS VALUES(12, 'Japón', EMPTY_BLOB());
 INSERT INTO PAIS VALUES(13, 'Jamaica', EMPTY_BLOB());
 INSERT INTO PAIS VALUES(14, 'Brasil', EMPTY_BLOB());
 INSERT INTO PAIS VALUES(15, 'Italia', EMPTY_BLOB());
+
+
+/* INSERTS DE EMPRESA, son 15 competidor y 15 proveedor */
+
+INSERT INTO EMPRESA VALUES(1, 'Mochileros Venezuela', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(2, 'Cómete el Ávila', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(3, 'Trekking Venezuela', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(4, 'Caminantes', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(5, 'Turaser', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(6, 'Mérida Tuya', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(7, 'Travellers', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(8, 'Estrella Latina', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(9, 'Conferry', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(10, 'Canaima Tours', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(11, 'Lancheros del Cayo', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(12, 'Pasarini', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(13, 'Amigos del Catatumbo', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(14, 'Ruta 2', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(15, 'Viaja Feliz', EMPTY_BLOB());
+
+
+INSERT INTO EMPRESA VALUES(16, 'Hoteles Marriot', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(17, 'Naútica Venezuela', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(18, 'Mochileros del Ávila', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(19, 'Desert Drift', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(20, 'Fotógrafía Zuliana', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(21, 'Imperio Turístico', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(22, 'Águilas de Montaña', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(23, 'Playeros Venezuela', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(24, 'Transportes playeros', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(25, 'Pesqueros Asociados', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(26, 'Viajes 3000', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(27, 'Conferencias Emporio', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(28, 'Ticketmundo', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(29, 'Empresa La Poderosa', EMPTY_BLOB());
+INSERT INTO EMPRESA VALUES(30, 'Amigos de Viaje', EMPTY_BLOB());
+
+
+/* INSERTS DE COMPETIDOR */
+
+INSERT INTO COMPETIDOR VALUES(1);
+INSERT INTO COMPETIDOR VALUES(2);
+INSERT INTO COMPETIDOR VALUES(3);
+INSERT INTO COMPETIDOR VALUES(4);
+INSERT INTO COMPETIDOR VALUES(5);
+INSERT INTO COMPETIDOR VALUES(6);
+INSERT INTO COMPETIDOR VALUES(7);
+INSERT INTO COMPETIDOR VALUES(8);
+INSERT INTO COMPETIDOR VALUES(9);
+INSERT INTO COMPETIDOR VALUES(10);
+INSERT INTO COMPETIDOR VALUES(11);
+INSERT INTO COMPETIDOR VALUES(12);
+INSERT INTO COMPETIDOR VALUES(13);
+INSERT INTO COMPETIDOR VALUES(14);
+INSERT INTO COMPETIDOR VALUES(15);
+
+
+/* INSERTS DE PROVEEDOR */
+
+INSERT INTO PROVEEDOR VALUES(16);
+INSERT INTO PROVEEDOR VALUES(17);
+INSERT INTO PROVEEDOR VALUES(18);
+INSERT INTO PROVEEDOR VALUES(19);
+INSERT INTO PROVEEDOR VALUES(20);
+INSERT INTO PROVEEDOR VALUES(21);
+INSERT INTO PROVEEDOR VALUES(22);
+INSERT INTO PROVEEDOR VALUES(23);
+INSERT INTO PROVEEDOR VALUES(24);
+INSERT INTO PROVEEDOR VALUES(25);
+INSERT INTO PROVEEDOR VALUES(26);
+INSERT INTO PROVEEDOR VALUES(27);
+INSERT INTO PROVEEDOR VALUES(28);
+INSERT INTO PROVEEDOR VALUES(29);
+INSERT INTO PROVEEDOR VALUES(30);
