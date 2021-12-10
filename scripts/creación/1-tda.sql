@@ -289,13 +289,12 @@ CREATE OR REPLACE TYPE BODY PRECIO AS
     MEMBER PROCEDURE sumarPrecio (precio NUMBER)
     IS
     BEGIN
-        SELF.PRECIO_TOTAL := SELF.PRECIO_TOTAL + precio;
+        UPDATE PAQUETE_TURISTICO pt SET pt.paq_precio.precio_total = SELF.precio_total + precio WHERE pt.paq_precio = SELF;
     END;
 
     CONSTRUCTOR FUNCTION PRECIO (precio_base NUMBER) RETURN SELF AS RESULT
     IS
     BEGIN
-        precio_total = 0;
         IF(PRECIO.validarCantidad(precio_base) = 1) THEN
             SELF.precio_total := precio_base;
             RETURN;

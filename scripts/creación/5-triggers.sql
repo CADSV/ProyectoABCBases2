@@ -1,4 +1,4 @@
--- Comprobar que no haya familiar (y, x) si ya hay familiar (x, y):
+-- Comprobar que no haya familiar (y, x) si ya hay familiar (x, y): --
 CREATE OR REPLACE TRIGGER check_familiares_recursivos 
 BEFORE INSERT ON FAMILIAR FOR EACH ROW
     DECLARE
