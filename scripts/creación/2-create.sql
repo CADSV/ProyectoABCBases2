@@ -270,7 +270,7 @@ CREATE TABLE ASISTENCIA(
     ser_id NUMBER NOT NULL,
     
     CONSTRAINT fk_cli_id_asi FOREIGN KEY (cli_id) REFERENCES CLIENTE(cli_id),
-    CONSTRAINT fk_ser_id_asi FOREIGN KEY (ser_id) REFERENCES SERVICICO(ser_id)
+    CONSTRAINT fk_ser_id_asi FOREIGN KEY (ser_id) REFERENCES SERVICIO(ser_id)
 );
 
 /
