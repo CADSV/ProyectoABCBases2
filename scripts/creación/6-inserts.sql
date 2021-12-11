@@ -1,19 +1,19 @@
 /* INSERTS DE TRANSPORTE, primero 15 cruceros y luego 15 unidades terrestres*/
-INSERT INTO TRANSPORTE VALUES (1, EMPTY_BLOB(), 'Elizabeth');
-INSERT INTO TRANSPORTE VALUES (2, EMPTY_BLOB(), 'La Pinta');
-INSERT INTO TRANSPORTE VALUES (3, EMPTY_BLOB(), 'La Niña');
-INSERT INTO TRANSPORTE VALUES (4, EMPTY_BLOB(), 'La Santa María');
-INSERT INTO TRANSPORTE VALUES (5, EMPTY_BLOB(), 'Emiliana');
-INSERT INTO TRANSPORTE VALUES (6, EMPTY_BLOB(), 'Siete Mares');
-INSERT INTO TRANSPORTE VALUES (7, EMPTY_BLOB(), 'Marithea');
-INSERT INTO TRANSPORTE VALUES (8, EMPTY_BLOB(), 'Estrella del Caribe');
-INSERT INTO TRANSPORTE VALUES (9, EMPTY_BLOB(), 'La Isla');
-INSERT INTO TRANSPORTE VALUES (10, EMPTY_BLOB(), 'Margarita');
-INSERT INTO TRANSPORTE VALUES (11, EMPTY_BLOB(), 'Bogotana');
-INSERT INTO TRANSPORTE VALUES (12, EMPTY_BLOB(), 'Poseidón');
-INSERT INTO TRANSPORTE VALUES (13, EMPTY_BLOB(), 'Acrópolis');
-INSERT INTO TRANSPORTE VALUES (14, EMPTY_BLOB(), 'Oracle');
-INSERT INTO TRANSPORTE VALUES (15, EMPTY_BLOB(), 'Bismark');
+execute INSERTAR_BLOB_TRANSPORTE(1, 'transportes/Elizabeth.jpg', 'Elizabeth');
+execute INSERTAR_BLOB_TRANSPORTE(2, 'transportes/La Pinta.jpg', 'La Pinta');
+execute INSERTAR_BLOB_TRANSPORTE(3, 'transportes/La Nina.jpg', 'La Niña');
+execute INSERTAR_BLOB_TRANSPORTE(4, 'transportes/La Santa Maria.jpg', 'La Santa María');
+execute INSERTAR_BLOB_TRANSPORTE(5, 'transportes/Emiliana.jpg', 'Emiliana');
+execute INSERTAR_BLOB_TRANSPORTE(6, 'transportes/Siete Mares.jpg', 'Siete Mares');
+execute INSERTAR_BLOB_TRANSPORTE(7, 'transportes/Marithea.jpg', 'Marithea');
+execute INSERTAR_BLOB_TRANSPORTE(8, 'transportes/Estrella del Caribe.jpg', 'Estrella del Caribe');
+execute INSERTAR_BLOB_TRANSPORTE(9, 'transportes/La Isla.jpg', 'La Isla');
+execute INSERTAR_BLOB_TRANSPORTE(10, 'transportes/Margarita.jpg', 'Margarita');
+execute INSERTAR_BLOB_TRANSPORTE(11, 'transportes/Bogotana.jpg', 'Bogotana');
+execute INSERTAR_BLOB_TRANSPORTE(12, 'transportes/Poseidon.jpg', 'Poseidón');
+execute INSERTAR_BLOB_TRANSPORTE(13, 'transportes/Acropolis.jpg', 'Acrópolis');
+execute INSERTAR_BLOB_TRANSPORTE(14, 'transportes/Oracle.jpg', 'Oracle');
+execute INSERTAR_BLOB_TRANSPORTE(15, 'transportes/Bismark.jpg', 'Bismark');
 /
 
 
@@ -76,78 +76,80 @@ INSERT INTO TERRESTRE VALUES(30);
 
 /* INSERTS DE DESTINO_TURISTICO */
 
-INSERT INTO DESTINO_TURISTICO VALUES(1,'Los Roques',EMPTY_BLOB(), EMPTY_BLOB(), 'Sin duda alguna, la playa hermosa de toda Venezuela con aguas cristalinas y espectaculares paisajes.');
-INSERT INTO DESTINO_TURISTICO VALUES(2,'La Orchila',EMPTY_BLOB(), EMPTY_BLOB(), 'La Isla más bella y con más diversión de Venezuela.');
-INSERT INTO DESTINO_TURISTICO VALUES(3,'Los Frailes',EMPTY_BLOB(), EMPTY_BLOB(), 'Hermosos atardeceres y playas cristalinas.');
-INSERT INTO DESTINO_TURISTICO VALUES(4,'Los Testigos',EMPTY_BLOB(), EMPTY_BLOB(), 'Desde aquí puedes ver las Antillas Neerlandesas.');
-INSERT INTO DESTINO_TURISTICO VALUES(5,'Las Aves',EMPTY_BLOB(), EMPTY_BLOB(), 'Playas sabrosas y peculiares, con diferentes tonalidades de arena.');
-INSERT INTO DESTINO_TURISTICO VALUES(6,'La Tortuga',EMPTY_BLOB(), EMPTY_BLOB(), 'Su nombre lo recibe de su peculiar figura, podrás hacer muchas actividades divertidas aquí.');
-INSERT INTO DESTINO_TURISTICO VALUES(7,'Morrocoy',EMPTY_BLOB(), EMPTY_BLOB(), 'Decenas de increíbles y paradisíacos cayos llenos de sabrosas y cristalinas playas con corales.');
-INSERT INTO DESTINO_TURISTICO VALUES(8,'Canaima',EMPTY_BLOB(), EMPTY_BLOB(), 'El Parque Nacional más importante de Venezuela, con con los tepuyes más antiguos y la cascada más alta del planeta.');
-INSERT INTO DESTINO_TURISTICO VALUES(9,'Henri Pittier',EMPTY_BLOB(), EMPTY_BLOB(), 'Lleno de senderos, cuevas y playas que se pueden visitar y disfrutar.');
-INSERT INTO DESTINO_TURISTICO VALUES(10,'Sierra Nevada',EMPTY_BLOB(), EMPTY_BLOB(), 'Los picos más altos de Venezuela, llenos de nieve, misticismo e ilusión por descubrir esta maravillosa región.');
-INSERT INTO DESTINO_TURISTICO VALUES(11,'Naiguatá',EMPTY_BLOB(), EMPTY_BLOB(), 'El Pico más alto de la Cordillera de la Costa, con 2765 msnm, puedes ver toda la Ciudad Capital, y el Estado Vargas.');
-INSERT INTO DESTINO_TURISTICO VALUES(12,'Médanos de Coro',EMPTY_BLOB(), EMPTY_BLOB(), 'Si quieres dunas, arenas y un paisaje árido, este es el lugar perfecto.');
-INSERT INTO DESTINO_TURISTICO VALUES(13,'Cuevas del Guácharo',EMPTY_BLOB(), EMPTY_BLOB(), 'Cuevas llenas de misterios, oscuridad y murciélagos.');
-INSERT INTO DESTINO_TURISTICO VALUES(14,'Sierra de Perijá',EMPTY_BLOB(), EMPTY_BLOB(), 'Hermoso Parque lleno de selvas, montañas y amigables comunidades indígenas.');
-INSERT INTO DESTINO_TURISTICO VALUES(15,'Catatumbo',EMPTY_BLOB(), EMPTY_BLOB(), 'Aquí ocurre uno de los fenómenos naturales más impresionantes del mundo, con cientos de rayos.');
+execute INSERTAR_BLOB_DESTINO(1,'Los Roques','destinos/Los Roques.jpg', 'destinos/Los Roques.gif', 'Sin duda alguna, las playas más hermosas de toda Venezuela con aguas cristalinas y espectaculares paisajes.');
+execute INSERTAR_BLOB_DESTINO(2,'La Orchila','destinos/La Orchila.jpg', 'destinos/La Orchila.gif', 'La Isla más bella y con más diversión de Venezuela.');
+execute INSERTAR_BLOB_DESTINO(3,'Los Frailes','destinos/Los Frailes.jpg', 'destinos/Los Frailes.gif', 'Hermosos atardeceres y playas cristalinas.');
+execute INSERTAR_BLOB_DESTINO(4,'Los Testigos','destinos/Los Testigos.jpg', 'destinos/Los Testigos.gif', 'Desde aquí puedes ver las Antillas Neerlandesas.');
+execute INSERTAR_BLOB_DESTINO(5,'Las Aves','destinos/Las Aves.jpg', 'destinos/Las Aves.gif', 'Playas sabrosas y peculiares, con diferentes tonalidades de arena.');
+execute INSERTAR_BLOB_DESTINO(6,'La Tortuga','destinos/La Tortuga.jpg', 'destinos/La Tortuga.gif', 'Su nombre lo recibe de su peculiar figura, podrás hacer muchas actividades divertidas aquí.');
+execute INSERTAR_BLOB_DESTINO(7,'Morrocoy','destinos/Morrocoy.jpg', 'destinos/Morrocoy.gif', 'Decenas de increíbles y paradisíacos cayos llenos de sabrosas y cristalinas playas con corales.');
+execute INSERTAR_BLOB_DESTINO(8,'Canaima','destinos/Canaima.jpg', 'destinos/Canaima.gif', 'El Parque Nacional más importante de Venezuela, con con los tepuyes más antiguos y la cascada más alta del planeta.');
+execute INSERTAR_BLOB_DESTINO(9,'Henri Pittier','destinos/Henri Pittier.jpg', 'destinos/Henri Pittier.gif', 'Lleno de senderos, cuevas y playas que se pueden visitar y disfrutar.');
+execute INSERTAR_BLOB_DESTINO(10,'Sierra Nevada','destinos/Sierra Nevada.jpg', 'destinos/Sierra Nevada.gif', 'Los picos más altos de Venezuela, llenos de nieve, misticismo e ilusión por descubrir esta maravillosa región.');
+execute INSERTAR_BLOB_DESTINO(11,'Naiguatá','destinos/Naiguata.jpg', 'destinos/Naiguata.gif', 'El Pico más alto de la Cordillera de la Costa, con 2765 msnm, puedes ver toda la Ciudad Capital, y el Estado Vargas.');
+execute INSERTAR_BLOB_DESTINO(12,'Médanos de Coro','destinos/Medanos de Coro.jpg', 'destinos/Medanos de Coro.gif', 'Si quieres dunas, arenas y un paisaje árido, este es el lugar perfecto.');
+execute INSERTAR_BLOB_DESTINO(13,'Cueva del Guácharo','destinos/Cueva del Guacharo.jpg', 'destinos/Cueva del Guacharo.gif', 'Cueva llena de misterios, oscuridad y murciélagos.');
+execute INSERTAR_BLOB_DESTINO(14,'Sierra de Perijá','destinos/Sierra de Perija.jpg', 'destinos/Sierra de Perija.gif', 'Hermoso Parque lleno de selvas, montañas y amigables comunidades indígenas.');
+execute INSERTAR_BLOB_DESTINO(15,'Mochima','destinos/Mochima.jpg', 'destinos/Mochima', 'Cuenta con islas que contienen escenarios de bahías, acantilados, golfos, costas de aguas profundas, playas de arena blanca y arrecifes de coral.');
 /
 
 
 /* INSERTS DE PAIS */
 
-INSERT INTO PAIS VALUES(1, 'Venezuela', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(2, 'Bélgica', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(3, 'Alemania', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(4, 'Estados Unidos', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(5, 'Líbano', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(6, 'Colombia', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(7, 'Francia', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(8, 'Corea del Norte', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(9, 'Cuba', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(10, 'Reino Unido', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(11, 'Sudáfrica', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(12, 'Japón', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(13, 'Jamaica', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(14, 'Brasil', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(15, 'Italia', EMPTY_BLOB());
+execute INSERTAR_BLOB_PAIS(1, 'Venezuela', 'paises/Alemania.png');
+execute INSERTAR_BLOB_PAIS(2, 'Bélgica', 'paises/Belgica.png');
+execute INSERTAR_BLOB_PAIS(3, 'Alemania', 'paises/Alemania.png');
+execute INSERTAR_BLOB_PAIS(4, 'Estados Unidos', 'paises/Estados Unidos.png');
+execute INSERTAR_BLOB_PAIS(5, 'Líbano', 'paises/Libano.png');
+execute INSERTAR_BLOB_PAIS(6, 'Colombia', 'paises/Colombia.png');
+execute INSERTAR_BLOB_PAIS(7, 'Francia', 'paises/Francia.png');
+execute INSERTAR_BLOB_PAIS(8, 'Corea del Norte', 'paises/Corea del Norte.png');
+execute INSERTAR_BLOB_PAIS(9, 'Cuba', 'paises/Cuba.png');
+execute INSERTAR_BLOB_PAIS(10, 'Reino Unido', 'paises/Reino Unido.png');
+execute INSERTAR_BLOB_PAIS(11, 'Sudáfrica', 'paises/Sudafrica.png');
+execute INSERTAR_BLOB_PAIS(12, 'Japón', 'paises/Japon.png');
+execute INSERTAR_BLOB_PAIS(13, 'Jamaica', 'paises/Jamaica.png');
+execute INSERTAR_BLOB_PAIS(14, 'Brasil', 'paises/Brasil.png');
+execute INSERTAR_BLOB_PAIS(15, 'Italia', 'paises/Italia.png');
 /
 
 /* INSERTS DE EMPRESA, son 15 competidor y 15 proveedor */
 
-INSERT INTO EMPRESA VALUES(1, 'Mochileros Venezuela', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(2, 'Cómete el Ávila', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(3, 'Trekking Venezuela', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(4, 'Caminantes', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(5, 'Turaser', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(6, 'Mérida Tuya', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(7, 'Travellers', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(8, 'Estrella Latina', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(9, 'Conferry', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(10, 'Canaima Tours', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(11, 'Lancheros del Cayo', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(12, 'Pasarini', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(13, 'Amigos del Catatumbo', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(14, 'Ruta 2', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(15, 'Viaja Feliz', EMPTY_BLOB());
+execute INSERTAR_BLOB_EMPRESA(1, 'Mochileros Venezuela', 'empresa/Mochileros Venezuela.png');
+execute INSERTAR_BLOB_EMPRESA(2, 'Cómete al Ávila', 'empresa/Comete al Avila.png');
+execute INSERTAR_BLOB_EMPRESA(3, 'Trekking Venezuela', 'empresa/Trekking Venezuela.png');
+execute INSERTAR_BLOB_EMPRESA(4, 'Caminantes', 'empresa/Caminantes.png');
+execute INSERTAR_BLOB_EMPRESA(5, 'Turaser', 'empresa/Turaser.jpg');
+execute INSERTAR_BLOB_EMPRESA(6, 'Mérida Tuya', 'empresa/Merida Tuya.png');
+execute INSERTAR_BLOB_EMPRESA(7, 'Travellers', 'empresa/Travellers.png');
+execute INSERTAR_BLOB_EMPRESA(8, 'Estrella Latina', 'empresa/Estrella Latina.png');
+execute INSERTAR_BLOB_EMPRESA(9, 'Conferry', 'empresa/Conferry.png');
+execute INSERTAR_BLOB_EMPRESA(10, 'Canaima Tours', 'empresa/Canaima Tours.png');
+execute INSERTAR_BLOB_EMPRESA(11, 'Lancheros del Cayo', 'empresa/Lancheros del Cayo.png');
+execute INSERTAR_BLOB_EMPRESA(12, 'Pasarini', 'empresa/Pasarini.png');
+execute INSERTAR_BLOB_EMPRESA(13, 'Amigos del Mar', 'empresa/Amigos del Mar.png');
+execute INSERTAR_BLOB_EMPRESA(14, 'Ruta 2', 'empresa/Ruta 2.png');
+execute INSERTAR_BLOB_EMPRESA(15, 'Viaja Feliz', 'empresa/Viaja Feliz.png');
 /
 
-INSERT INTO EMPRESA VALUES(16, 'Hoteles Marriot', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(17, 'Naútica Venezuela', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(18, 'Mochileros del Ávila', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(19, 'Desert Drift', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(20, 'Fotógrafía Zuliana', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(21, 'Imperio Turístico', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(22, 'Águilas de Montaña', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(23, 'Playeros Venezuela', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(24, 'Transportes playeros', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(25, 'Pesqueros Asociados', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(26, 'Viajes 3000', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(27, 'Conferencias Emporio', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(28, 'Ticketmundo', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(29, 'Empresa La Poderosa', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(30, 'Amigos de Viaje', EMPTY_BLOB());
+execute INSERTAR_BLOB_EMPRESA(16, 'Hoteles Intercontinente', 'empresa/Hoteles Intercontinente.png');
+execute INSERTAR_BLOB_EMPRESA(17, 'Naútica Venezuela', 'empresa/Nautica Venezuela.png');
+execute INSERTAR_BLOB_EMPRESA(18, 'Mochileros del Ávila', 'empresa/Mochileros del Avila.png');
+execute INSERTAR_BLOB_EMPRESA(19, 'Desert Drift', 'empresa/Desert Drift.png');
+execute INSERTAR_BLOB_EMPRESA(20, 'Fotografía Zuliana', 'empresa/Fotografia Zuliana.png');
+execute INSERTAR_BLOB_EMPRESA(21, 'Imperio Turístico', 'empresa/Imperio Turistico.png');
+execute INSERTAR_BLOB_EMPRESA(22, 'Águilas de Montaña', 'empresa/Aguilas de Montaña.png');
+execute INSERTAR_BLOB_EMPRESA(23, 'Playeros Venezuela', 'empresa/Playeros Venezuela.png');
+execute INSERTAR_BLOB_EMPRESA(24, 'Transportes Playeros', 'empresa/Transportes Playeros.png');
+execute INSERTAR_BLOB_EMPRESA(25, 'Pesqueros Asociados', 'empresa/Pesqueros Asociados.png');
+execute INSERTAR_BLOB_EMPRESA(26, 'Viajes 3000', 'empresa/Viajes 3000.png');
+execute INSERTAR_BLOB_EMPRESA(27, 'Conferencias Emporio', 'empresa/Conferencias Emporio.png');
+execute INSERTAR_BLOB_EMPRESA(28, 'Ticketglobo', 'empresa/Ticketglobo.png');
+execute INSERTAR_BLOB_EMPRESA(29, 'Empresa La Poderosa', 'empresa/Empresa La Poderosa.png');
+execute INSERTAR_BLOB_EMPRESA(30, 'Amigos de Viaje', 'empresa/Amigos de Viaje.png');
 /
+
+-- Logos gracias a: https://looka.com
 
 /* INSERTS DE COMPETIDOR */
 
@@ -290,21 +292,21 @@ INSERT  INTO FAMILIAR VALUES(1,13);
 
 /* INSERTS DE SERVICIO */
 
-INSERT INTO SERVICIO VALUES(1, 'Conferencias ecológicas', EMPTY_BLOB(), 80, 14, 1, 8, NULL, NULL);
+INSERT INTO SERVICIO VALUES(1, 'Conferencias Ecológicas', EMPTY_BLOB(), 80, 14, 1, 8, NULL, NULL);
 INSERT INTO SERVICIO VALUES(2, 'Montañismo', EMPTY_BLOB(), 32, 2, 1, 11, NULL, NULL);
-INSERT INTO SERVICIO VALUES(3, 'Paseo a Cayos', EMPTY_BLOB(), 123, 21, 1, 7, NULL, NULL);
-INSERT INTO SERVICIO VALUES(4, 'Alojamiento', EMPTY_BLOB(), 122, 43, 1, 1, NULL, 13);
+INSERT INTO SERVICIO VALUES(3, 'Paseos a Cayos', EMPTY_BLOB(), 123, 21, 1, 7, 1, NULL);
+INSERT INTO SERVICIO VALUES(4, 'Alojamiento', EMPTY_BLOB(), 122, 43, 1, 1, NULL, 12);
 INSERT INTO SERVICIO VALUES(5, 'Observación de Aves', EMPTY_BLOB(), 241, 43, 1, 5, NULL, NULL);
-INSERT INTO SERVICIO VALUES(6, 'Visita a haciendas', EMPTY_BLOB(), 80, 1, 1, 14, 21, NULL);
-INSERT INTO SERVICIO VALUES(7, 'Excursión local', EMPTY_BLOB(), 24, 12, 1, 15, 12, 12);
-INSERT INTO SERVICIO VALUES(8, 'Bonji', EMPTY_BLOB(), 31, 4, 1, 10, 11, 11);
-INSERT INTO SERVICIO VALUES(9, 'Conferencias educativas', EMPTY_BLOB(), 525, 45, 1, 2, 10, 10);
-INSERT INTO SERVICIO VALUES(10, 'Paracaidismo', EMPTY_BLOB(), 1531, 54, 1, 1, 1, 1);
-INSERT INTO SERVICIO VALUES(11, 'Paseo a Playa', EMPTY_BLOB(), 32, 2, 1, 2, 2, 3);
+INSERT INTO SERVICIO VALUES(6, 'Visitas a Haciendas', EMPTY_BLOB(), 80, 1, 1, 14, NULL, NULL);
+INSERT INTO SERVICIO VALUES(7, 'Excursión Local', EMPTY_BLOB(), 24, 12, 1, 15, NULL, 13);
+INSERT INTO SERVICIO VALUES(8, 'Campamentos Ecológicos', EMPTY_BLOB(), 31, 4, 1, 10, NULL, 11);
+INSERT INTO SERVICIO VALUES(9, 'Conferencias Educativas', EMPTY_BLOB(), 525, 45, 1, 2, NULL, 10);
+INSERT INTO SERVICIO VALUES(10, 'Paracaidismo', EMPTY_BLOB(), 1531, 54, 1, 1, NULL, 1);
+INSERT INTO SERVICIO VALUES(11, 'Paseos a Playas', EMPTY_BLOB(), 32, 2, 1, 2, 2, 4);
 INSERT INTO SERVICIO VALUES(12, 'Alpinismo', EMPTY_BLOB(), 675, 43, 1, 10, NULL, 3);
 INSERT INTO SERVICIO VALUES(13, 'Senderismo', EMPTY_BLOB(), 53, 5, 1, 11, 1, NULL);
-INSERT INTO SERVICIO VALUES(14, 'Picnic playero', EMPTY_BLOB(), 365, 34, 1, 3, NULL, NULL);
-INSERT INTO SERVICIO VALUES(15, 'Tour deportivo', EMPTY_BLOB(), 876, 54, 1, 12, 18, 12);
+INSERT INTO SERVICIO VALUES(14, 'Paseos a Puertos', EMPTY_BLOB(), 365, 34, 1, 3, 3, NULL);
+INSERT INTO SERVICIO VALUES(15, 'Visita Dirigida', EMPTY_BLOB(), 876, 54, 1, 12, NULL, 15);
 /
 
 /* INSERTS DE PCR */
