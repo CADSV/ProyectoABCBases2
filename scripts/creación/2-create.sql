@@ -312,12 +312,14 @@ CREATE OR REPLACE DIRECTORY IMAGES AS 'C:\Users\user\Desktop\Alejandro\Universid
 
 --CARLOS:
 /*
-CREATE OR REPLACE DIRECTORY IMAGES AS '';
+CREATE OR REPLACE DIRECTORY IMAGES AS 'C:\Users\Carlos Doffiny\Desktop\UCAB\7mo Semestre\Bases II\Proyecto\Imagenes';
 */
 
 /*
 GRANT READ, WRITE ON DIRECTORY IMAGES TO system;
 */
+
+
 
 --Prueba insertando una imagen en una tabla:
 /*
@@ -326,8 +328,8 @@ DECLARE
     V_blob BLOB;
     V_bfile BFILE;
 BEGIN 
-    INSERT INTO PAIS VALUES (pai_id.nextVal,'Venezuela',EMPTY_BLOB()) RETURNING foto INTO V_blob;
-    V_bfile := BFILENAME('IMAGES', 'venezuela.png');
+    INSERT INTO PAIS VALUES (pai_id.nextVal,'Venezuela',EMPTY_BLOB()) RETURNING pai_bandera INTO V_blob;
+    V_bfile := BFILENAME('IMAGES', 'Venezuela.png');
     DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
     DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
    COMMIT;
