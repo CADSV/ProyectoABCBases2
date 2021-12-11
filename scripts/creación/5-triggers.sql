@@ -86,3 +86,5 @@ AFTER INSERT ON CARACTERISTICA FOR EACH ROW
         
         obprecio.sumarPrecio(valpr);
     END;
+
+/

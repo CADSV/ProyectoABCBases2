@@ -9,6 +9,7 @@ create or replace PROCEDURE INSERTAR_BLOB_TRANSPORTE (id NUMBER, archivo VARCHAR
         V_bfile := BFILENAME('IMAGES', archivo);
         DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
         DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
+        DBMS_LOB.CLOSE(V_bfile);
         COMMIT;
     END;
 
@@ -23,6 +24,7 @@ create or replace PROCEDURE INSERTAR_BLOB_DESTINO_FOTO (id NUMBER, nombre VARCHA
         V_bfile := BFILENAME('IMAGES', archivofoto);
         DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
         DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
+        DBMS_LOB.CLOSE(V_bfile);
         COMMIT;
     END;
 
@@ -40,6 +42,7 @@ create or replace PROCEDURE INSERTAR_BLOB_DESTINO_VIDEO (id NUMBER, archivovideo
         V_bfile := BFILENAME('IMAGES', archivovideo);
         DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
         DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
+        DBMS_LOB.CLOSE(V_bfile);
         COMMIT;
     END;
 
@@ -63,6 +66,7 @@ create or replace PROCEDURE INSERTAR_BLOB_PAIS (id NUMBER, nombre VARCHAR2, arch
         V_bfile := BFILENAME('IMAGES', archivo);
         DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
         DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
+        DBMS_LOB.CLOSE(V_bfile);
         COMMIT;
     END;
 
@@ -77,6 +81,7 @@ create or replace PROCEDURE INSERTAR_BLOB_EMPRESA (id NUMBER, nombre VARCHAR2, a
         V_bfile := BFILENAME('IMAGES', archivo);
         DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
         DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
+        DBMS_LOB.CLOSE(V_bfile);
         COMMIT;
     END;
 
@@ -91,5 +96,6 @@ create or replace PROCEDURE INSERTAR_BLOB_SERVICIO (id NUMBER, nombre VARCHAR2, 
         V_bfile := BFILENAME('IMAGES', archivo);
         DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
         DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
+        DBMS_LOB.CLOSE(V_bfile);
         COMMIT;
     END;
