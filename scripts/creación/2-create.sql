@@ -206,6 +206,7 @@ CREATE TABLE PAGO(
 CREATE TABLE DISPONIBILIDAD(
     dis_id NUMBER PRIMARY KEY,
     dis_fecha FECHA NOT NULL,
+    dis_creacion DATE NOT NULL,
     dis_cantidad_disp NUMBER NOT NULL,
     ser_id NUMBER NOT NULL,
     
