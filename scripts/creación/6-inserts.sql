@@ -1,19 +1,19 @@
 /* INSERTS DE TRANSPORTE, primero 15 cruceros y luego 15 unidades terrestres*/
-INSERT INTO TRANSPORTE VALUES (1, EMPTY_BLOB(), 'Elizabeth');
-INSERT INTO TRANSPORTE VALUES (2, EMPTY_BLOB(), 'La Pinta');
-INSERT INTO TRANSPORTE VALUES (3, EMPTY_BLOB(), 'La Niña');
-INSERT INTO TRANSPORTE VALUES (4, EMPTY_BLOB(), 'La Santa María');
-INSERT INTO TRANSPORTE VALUES (5, EMPTY_BLOB(), 'Emiliana');
-INSERT INTO TRANSPORTE VALUES (6, EMPTY_BLOB(), 'Siete Mares');
-INSERT INTO TRANSPORTE VALUES (7, EMPTY_BLOB(), 'Marithea');
-INSERT INTO TRANSPORTE VALUES (8, EMPTY_BLOB(), 'Estrella del Caribe');
-INSERT INTO TRANSPORTE VALUES (9, EMPTY_BLOB(), 'La Isla');
-INSERT INTO TRANSPORTE VALUES (10, EMPTY_BLOB(), 'Margarita');
-INSERT INTO TRANSPORTE VALUES (11, EMPTY_BLOB(), 'Bogotana');
-INSERT INTO TRANSPORTE VALUES (12, EMPTY_BLOB(), 'Poseidón');
-INSERT INTO TRANSPORTE VALUES (13, EMPTY_BLOB(), 'Acrópolis');
-INSERT INTO TRANSPORTE VALUES (14, EMPTY_BLOB(), 'Oracle');
-INSERT INTO TRANSPORTE VALUES (15, EMPTY_BLOB(), 'Bismark');
+execute INSERTAR_BLOB_TRANSPORTE(1, 'transportes/Elizabeth.jpg', 'Elizabeth');
+execute INSERTAR_BLOB_TRANSPORTE(2, 'transportes/La Pinta.jpg', 'La Pinta');
+execute INSERTAR_BLOB_TRANSPORTE(3, 'transportes/La Nina.jpg', 'La Niña');
+execute INSERTAR_BLOB_TRANSPORTE(4, 'transportes/La Santa Maria.jpg', 'La Santa María');
+execute INSERTAR_BLOB_TRANSPORTE(5, 'transportes/Emiliana.jpg', 'Emiliana');
+execute INSERTAR_BLOB_TRANSPORTE(6, 'transportes/Siete Mares.jpg', 'Siete Mares');
+execute INSERTAR_BLOB_TRANSPORTE(7, 'transportes/Marithea.jpg', 'Marithea');
+execute INSERTAR_BLOB_TRANSPORTE(8, 'transportes/Estrella del Caribe.jpg', 'Estrella del Caribe');
+execute INSERTAR_BLOB_TRANSPORTE(9, 'transportes/La Isla.jpg', 'La Isla');
+execute INSERTAR_BLOB_TRANSPORTE(10, 'transportes/Margarita.jpg', 'Margarita');
+execute INSERTAR_BLOB_TRANSPORTE(11, 'transportes/Bogotana.jpg', 'Bogotana');
+execute INSERTAR_BLOB_TRANSPORTE(12, 'transportes/Poseidon.jpg', 'Poseidón');
+execute INSERTAR_BLOB_TRANSPORTE(13, 'transportes/Acropolis.jpg', 'Acrópolis');
+execute INSERTAR_BLOB_TRANSPORTE(14, 'transportes/Oracle.jpg', 'Oracle');
+execute INSERTAR_BLOB_TRANSPORTE(15, 'transportes/Bismark.jpg', 'Bismark');
 /
 
 
@@ -76,78 +76,80 @@ INSERT INTO TERRESTRE VALUES(30);
 
 /* INSERTS DE DESTINO_TURISTICO */
 
-INSERT INTO DESTINO_TURISTICO VALUES(1,'Los Roques',EMPTY_BLOB(), EMPTY_BLOB(), 'Sin duda alguna, la playa hermosa de toda Venezuela con aguas cristalinas y espectaculares paisajes.');
-INSERT INTO DESTINO_TURISTICO VALUES(2,'La Orchila',EMPTY_BLOB(), EMPTY_BLOB(), 'La Isla más bella y con más diversión de Venezuela.');
-INSERT INTO DESTINO_TURISTICO VALUES(3,'Los Frailes',EMPTY_BLOB(), EMPTY_BLOB(), 'Hermosos atardeceres y playas cristalinas.');
-INSERT INTO DESTINO_TURISTICO VALUES(4,'Los Testigos',EMPTY_BLOB(), EMPTY_BLOB(), 'Desde aquí puedes ver las Antillas Neerlandesas.');
-INSERT INTO DESTINO_TURISTICO VALUES(5,'Las Aves',EMPTY_BLOB(), EMPTY_BLOB(), 'Playas sabrosas y peculiares, con diferentes tonalidades de arena.');
-INSERT INTO DESTINO_TURISTICO VALUES(6,'La Tortuga',EMPTY_BLOB(), EMPTY_BLOB(), 'Su nombre lo recibe de su peculiar figura, podrás hacer muchas actividades divertidas aquí.');
-INSERT INTO DESTINO_TURISTICO VALUES(7,'Morrocoy',EMPTY_BLOB(), EMPTY_BLOB(), 'Decenas de increíbles y paradisíacos cayos llenos de sabrosas y cristalinas playas con corales.');
-INSERT INTO DESTINO_TURISTICO VALUES(8,'Canaima',EMPTY_BLOB(), EMPTY_BLOB(), 'El Parque Nacional más importante de Venezuela, con con los tepuyes más antiguos y la cascada más alta del planeta.');
-INSERT INTO DESTINO_TURISTICO VALUES(9,'Henri Pittier',EMPTY_BLOB(), EMPTY_BLOB(), 'Lleno de senderos, cuevas y playas que se pueden visitar y disfrutar.');
-INSERT INTO DESTINO_TURISTICO VALUES(10,'Sierra Nevada',EMPTY_BLOB(), EMPTY_BLOB(), 'Los picos más altos de Venezuela, llenos de nieve, misticismo e ilusión por descubrir esta maravillosa región.');
-INSERT INTO DESTINO_TURISTICO VALUES(11,'Naiguatá',EMPTY_BLOB(), EMPTY_BLOB(), 'El Pico más alto de la Cordillera de la Costa, con 2765 msnm, puedes ver toda la Ciudad Capital, y el Estado Vargas.');
-INSERT INTO DESTINO_TURISTICO VALUES(12,'Médanos de Coro',EMPTY_BLOB(), EMPTY_BLOB(), 'Si quieres dunas, arenas y un paisaje árido, este es el lugar perfecto.');
-INSERT INTO DESTINO_TURISTICO VALUES(13,'Cuevas del Guácharo',EMPTY_BLOB(), EMPTY_BLOB(), 'Cuevas llenas de misterios, oscuridad y murciélagos.');
-INSERT INTO DESTINO_TURISTICO VALUES(14,'Sierra de Perijá',EMPTY_BLOB(), EMPTY_BLOB(), 'Hermoso Parque lleno de selvas, montañas y amigables comunidades indígenas.');
-INSERT INTO DESTINO_TURISTICO VALUES(15,'Catatumbo',EMPTY_BLOB(), EMPTY_BLOB(), 'Aquí ocurre uno de los fenómenos naturales más impresionantes del mundo, con cientos de rayos.');
+execute INSERTAR_BLOB_DESTINO(1,'Los Roques','destinos/Los Roques.jpg', 'destinos/Los Roques.gif', 'Sin duda alguna, las playas más hermosas de toda Venezuela con aguas cristalinas y espectaculares paisajes.');
+execute INSERTAR_BLOB_DESTINO(2,'La Orchila','destinos/La Orchila.jpg', 'destinos/La Orchila.gif', 'La Isla más bella y con más diversión de Venezuela.');
+execute INSERTAR_BLOB_DESTINO(3,'Los Frailes','destinos/Los Frailes.jpg', 'destinos/Los Frailes.gif', 'Hermosos atardeceres y playas cristalinas.');
+execute INSERTAR_BLOB_DESTINO(4,'Los Testigos','destinos/Los Testigos.jpg', 'destinos/Los Testigos.gif', 'Desde aquí puedes ver las Antillas Neerlandesas.');
+execute INSERTAR_BLOB_DESTINO(5,'Las Aves','destinos/Las Aves.jpg', 'destinos/Las Aves.gif', 'Playas sabrosas y peculiares, con diferentes tonalidades de arena.');
+execute INSERTAR_BLOB_DESTINO(6,'La Tortuga','destinos/La Tortuga.jpg', 'destinos/La Tortuga.gif', 'Su nombre lo recibe de su peculiar figura, podrás hacer muchas actividades divertidas aquí.');
+execute INSERTAR_BLOB_DESTINO(7,'Morrocoy','destinos/Morrocoy.jpg', 'destinos/Morrocoy.gif', 'Decenas de increíbles y paradisíacos cayos llenos de sabrosas y cristalinas playas con corales.');
+execute INSERTAR_BLOB_DESTINO(8,'Canaima','destinos/Canaima.jpg', 'destinos/Canaima.gif', 'El Parque Nacional más importante de Venezuela, con con los tepuyes más antiguos y la cascada más alta del planeta.');
+execute INSERTAR_BLOB_DESTINO(9,'Henri Pittier','destinos/Henri Pittier.jpg', 'destinos/Henri Pittier.gif', 'Lleno de senderos, cuevas y playas que se pueden visitar y disfrutar.');
+execute INSERTAR_BLOB_DESTINO(10,'Sierra Nevada','destinos/Sierra Nevada.jpg', 'destinos/Sierra Nevada.gif', 'Los picos más altos de Venezuela, llenos de nieve, misticismo e ilusión por descubrir esta maravillosa región.');
+execute INSERTAR_BLOB_DESTINO(11,'Naiguatá','destinos/Naiguata.jpg', 'destinos/Naiguata.gif', 'El Pico más alto de la Cordillera de la Costa, con 2765 msnm, puedes ver toda la Ciudad Capital, y el Estado Vargas.');
+execute INSERTAR_BLOB_DESTINO(12,'Médanos de Coro','destinos/Medanos de Coro.jpg', 'destinos/Medanos de Coro.gif', 'Si quieres dunas, arenas y un paisaje árido, este es el lugar perfecto.');
+execute INSERTAR_BLOB_DESTINO(13,'Cueva del Guácharo','destinos/Cueva del Guacharo.jpg', 'destinos/Cueva del Guacharo.gif', 'Cueva llena de misterios, oscuridad y murciélagos.');
+execute INSERTAR_BLOB_DESTINO(14,'Sierra de Perijá','destinos/Sierra de Perija.jpg', 'destinos/Sierra de Perija.gif', 'Hermoso Parque lleno de selvas, montañas y amigables comunidades indígenas.');
+execute INSERTAR_BLOB_DESTINO(15,'Mochima','destinos/Mochima.jpg', 'destinos/Mochima.gif', 'Cuenta con islas que contienen escenarios de bahías, acantilados, golfos, costas de aguas profundas, playas de arena blanca y arrecifes de coral.');
 /
 
 
 /* INSERTS DE PAIS */
 
-INSERT INTO PAIS VALUES(1, 'Venezuela', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(2, 'Bélgica', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(3, 'Alemania', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(4, 'Estados Unidos', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(5, 'Líbano', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(6, 'Colombia', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(7, 'Francia', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(8, 'Corea del Norte', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(9, 'Cuba', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(10, 'Reino Unido', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(11, 'Sudáfrica', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(12, 'Japón', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(13, 'Jamaica', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(14, 'Brasil', EMPTY_BLOB());
-INSERT INTO PAIS VALUES(15, 'Italia', EMPTY_BLOB());
+execute INSERTAR_BLOB_PAIS(1, 'Venezuela', 'paises/Alemania.png');
+execute INSERTAR_BLOB_PAIS(2, 'Bélgica', 'paises/Belgica.png');
+execute INSERTAR_BLOB_PAIS(3, 'Alemania', 'paises/Alemania.png');
+execute INSERTAR_BLOB_PAIS(4, 'Estados Unidos', 'paises/Estados Unidos.png');
+execute INSERTAR_BLOB_PAIS(5, 'Líbano', 'paises/Libano.png');
+execute INSERTAR_BLOB_PAIS(6, 'Colombia', 'paises/Colombia.png');
+execute INSERTAR_BLOB_PAIS(7, 'Francia', 'paises/Francia.png');
+execute INSERTAR_BLOB_PAIS(8, 'Corea del Norte', 'paises/Corea del Norte.png');
+execute INSERTAR_BLOB_PAIS(9, 'Cuba', 'paises/Cuba.png');
+execute INSERTAR_BLOB_PAIS(10, 'Reino Unido', 'paises/Reino Unido.png');
+execute INSERTAR_BLOB_PAIS(11, 'Sudáfrica', 'paises/Sudafrica.png');
+execute INSERTAR_BLOB_PAIS(12, 'Japón', 'paises/Japon.png');
+execute INSERTAR_BLOB_PAIS(13, 'Jamaica', 'paises/Jamaica.png');
+execute INSERTAR_BLOB_PAIS(14, 'Brasil', 'paises/Brasil.png');
+execute INSERTAR_BLOB_PAIS(15, 'Italia', 'paises/Italia.png');
 /
 
 /* INSERTS DE EMPRESA, son 15 competidor y 15 proveedor */
 
-INSERT INTO EMPRESA VALUES(1, 'Mochileros Venezuela', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(2, 'Cómete el Ávila', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(3, 'Trekking Venezuela', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(4, 'Caminantes', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(5, 'Turaser', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(6, 'Mérida Tuya', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(7, 'Travellers', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(8, 'Estrella Latina', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(9, 'Conferry', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(10, 'Canaima Tours', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(11, 'Lancheros del Cayo', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(12, 'Pasarini', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(13, 'Amigos del Catatumbo', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(14, 'Ruta 2', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(15, 'Viaja Feliz', EMPTY_BLOB());
+execute INSERTAR_BLOB_EMPRESA(1, 'Mochileros Venezuela', 'empresas/Mochileros Venezuela.png');
+execute INSERTAR_BLOB_EMPRESA(2, 'Cómete al Ávila', 'empresas/Comete al Avila.png');
+execute INSERTAR_BLOB_EMPRESA(3, 'Trekking Venezuela', 'empresas/Trekking Venezuela.png');
+execute INSERTAR_BLOB_EMPRESA(4, 'Caminantes', 'empresas/Caminantes.png');
+execute INSERTAR_BLOB_EMPRESA(5, 'Turaser', 'empresas/Turaser.jpg');
+execute INSERTAR_BLOB_EMPRESA(6, 'Mérida Tuya', 'empresas/Merida Tuya.png');
+execute INSERTAR_BLOB_EMPRESA(7, 'Travellers', 'empresas/Travellers.png');
+execute INSERTAR_BLOB_EMPRESA(8, 'Estrella Latina', 'empresas/Estrella Latina.png');
+execute INSERTAR_BLOB_EMPRESA(9, 'Conferry', 'empresas/Conferry.png');
+execute INSERTAR_BLOB_EMPRESA(10, 'Canaima Tours', 'empresas/Canaima Tours.png');
+execute INSERTAR_BLOB_EMPRESA(11, 'Lancheros del Cayo', 'empresas/Lancheros del Cayo.png');
+execute INSERTAR_BLOB_EMPRESA(12, 'Pasarini', 'empresas/Pasarini.png');
+execute INSERTAR_BLOB_EMPRESA(13, 'Amigos del Mar', 'empresas/Amigos del Mar.png');
+execute INSERTAR_BLOB_EMPRESA(14, 'Ruta 2', 'empresas/Ruta 2.png');
+execute INSERTAR_BLOB_EMPRESA(15, 'Viaja Feliz', 'empresas/Viaja Feliz.png');
 /
 
-INSERT INTO EMPRESA VALUES(16, 'Hoteles Marriot', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(17, 'Naútica Venezuela', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(18, 'Mochileros del Ávila', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(19, 'Desert Drift', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(20, 'Fotógrafía Zuliana', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(21, 'Imperio Turístico', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(22, 'Águilas de Montaña', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(23, 'Playeros Venezuela', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(24, 'Transportes playeros', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(25, 'Pesqueros Asociados', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(26, 'Viajes 3000', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(27, 'Conferencias Emporio', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(28, 'Ticketmundo', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(29, 'Empresa La Poderosa', EMPTY_BLOB());
-INSERT INTO EMPRESA VALUES(30, 'Amigos de Viaje', EMPTY_BLOB());
+execute INSERTAR_BLOB_EMPRESA(16, 'Hoteles Intercontinente', 'empresas/Hoteles Intercontinente.png');
+execute INSERTAR_BLOB_EMPRESA(17, 'Naútica Venezuela', 'empresas/Nautica Venezuela.png');
+execute INSERTAR_BLOB_EMPRESA(18, 'Mochileros del Ávila', 'empresas/Mochileros del Avila.png');
+execute INSERTAR_BLOB_EMPRESA(19, 'Desert Drift', 'empresas/Desert Drift.png');
+execute INSERTAR_BLOB_EMPRESA(20, 'Fotografía Zuliana', 'empresas/Fotografia Zuliana.png');
+execute INSERTAR_BLOB_EMPRESA(21, 'Imperio Turístico', 'empresas/Imperio Turistico.png');
+execute INSERTAR_BLOB_EMPRESA(22, 'Águilas de Montaña', 'empresas/Aguilas de Montana.png');
+execute INSERTAR_BLOB_EMPRESA(23, 'Playeros Venezuela', 'empresas/Playeros Venezuela.png');
+execute INSERTAR_BLOB_EMPRESA(24, 'Transportes Playeros', 'empresas/Transportes Playeros.png');
+execute INSERTAR_BLOB_EMPRESA(25, 'Pesqueros Asociados', 'empresas/Pesqueros Asociados.png');
+execute INSERTAR_BLOB_EMPRESA(26, 'Viajes 3000', 'empresas/Viajes 3000.png');
+execute INSERTAR_BLOB_EMPRESA(27, 'Conferencias Emporio', 'empresas/Conferencias Emporio.png');
+execute INSERTAR_BLOB_EMPRESA(28, 'Ticketglobo', 'empresas/Ticketglobo.png');
+execute INSERTAR_BLOB_EMPRESA(29, 'Empresa La Poderosa', 'empresas/Empresa La Poderosa.png');
+execute INSERTAR_BLOB_EMPRESA(30, 'Amigos del Viaje', 'empresas/Amigos del Viaje.png');
 /
+
+-- Logos gracias a: https://looka.com
 
 /* INSERTS DE COMPETIDOR */
 
@@ -210,21 +212,32 @@ INSERT INTO MANTENIMIENTO VALUES(15, '6-NOV-2021', 'Pisos nuevos de habitaciones
 
 /* INSERTS DE CLIENTE */
 
-INSERT INTO CLIENTE VALUES(1, DATOS('V', 27814707, 'Carlos', 'Antonio', 'Doffiny', 'Sánchez-Vegas', 'M', '15-AGO-2001', 'carlosdoffinysv@gmail.com', 1), 1);
-INSERT INTO CLIENTE VALUES(2, DATOS('V', 25463728, 'Alejandro', 'Jesús', 'Pestana', 'Youssif', 'M', '05-FEB-2000', 'alexprimaez@gmail.com', 1), 1);
-INSERT INTO CLIENTE VALUES(3, DATOS('V', 13327923, 'María', 'Ángeles', 'Vera', 'Rodríguez', 'F', '03-SEP-2001', 'mariavera@gmail.com', 0), 5);
-INSERT INTO CLIENTE VALUES(4, DATOS('V', 21487834, 'Jenny', 'Estefanía', 'Rejia', 'Martínez', 'F', '25-MAY-1993', 'jennyrejia@gmail.com', 0), 2);
-INSERT INTO CLIENTE VALUES(5, DATOS('V', 12367437, 'Manuel', 'Enrique', 'Pereira', 'Freites', 'M', '07-JUL-2006', 'elmanolo@gmail.com', 1), 3);
-INSERT INTO CLIENTE VALUES(6, DATOS('V', 14783232, 'Sir', 'Lewis', 'Hamilton', 'Davidson', 'M', '07-FEB-1985', '8timesworldchamp@gmail.com', 1), 10);
-INSERT INTO CLIENTE VALUES(7, DATOS('V', 32443982, 'Juliana', 'María', 'Rivas', 'Nieto', 'F', '07-MAR-2012', 'lajuliana@gmail.com', 0), 15);
-INSERT INTO CLIENTE VALUES(8, DATOS('V', 21453425, 'Gabriela', 'Emiliana', 'Torres', 'Hernández', 'F', '13-AGO-1991', 'lasupergabs@gmail.com', 0), 13);
-INSERT INTO CLIENTE VALUES(9, DATOS('V', 6237275, 'Luis', 'David', 'Cramel', 'Yonki', 'M', '18-NOV-1956', 'luisdavid@gmail.com', 0), 11);
-INSERT INTO CLIENTE VALUES(10, DATOS('V', 5434622, 'Nelson', 'Junior', 'Tellerías', 'Montero', 'M', '28-ENE-1967', 'nelsontelleria@gmail.com', 0), 11);
-INSERT INTO CLIENTE VALUES(11, DATOS('V', 8738725, 'Deilier', 'Loquilla', 'Primera', 'Segunda', 'F', '30-AGO-2000', 'deilierprimera@gmail.com', 1), 11);
-INSERT INTO CLIENTE VALUES(12, DATOS('V', 3246324, 'Adriana', 'Antonia', 'Rodríguez', 'González', 'F', '03-ABR-2015', 'adrianarodri@gmail.com', 1), 8);
-INSERT INTO CLIENTE VALUES(13, DATOS('V', 25743221, 'Vanessa', 'Lucía', 'Soto', 'Capobianco', 'F', '08-JUL-2020', 'vanessita@gmail.com', 1), 11);
-INSERT INTO CLIENTE VALUES(14, DATOS('V', 23124347, 'Mariana', 'Emily', 'Morao', 'Rosao', 'F', '14-MAR-1998', 'escribemevale@gmail.com', 1), 1);
-INSERT INTO CLIENTE VALUES(15, DATOS('V', 7352222, 'Greeicy', 'Bella', 'Rendón', 'de Doffiny', 'F', '30-OCT-1992', 'lagreeicy@gmail.com', 1), 2);
+INSERT INTO CLIENTE VALUES(1, DATOS('V', 27833721, 'Carlos', 'Antonio', 'Doffiny', 'Sánchez-Vegas', 'M', '15-AGO-2001', 'carlosdoffiny@gmail.com', 1), 1);
+INSERT INTO CLIENTE VALUES(2, DATOS('V', 25352222, 'Greeicy', 'Bella', 'Rendón', 'de Doffiny', 'F', '30-OCT-1992', 'lagreeicy@gmail.com', 1), 1);
+
+INSERT INTO CLIENTE VALUES(3, DATOS('V', 27553221, 'Alejandro', 'Jesús', 'Pestana', 'Youssif', 'M', '05-FEB-2000', 'alejandrop@gmail.com', 1), 1);
+
+INSERT INTO CLIENTE VALUES(4, DATOS('E', 13327923, 'José', 'Ángel', 'Pereira', 'Rodríguez', 'F', '03-SEP-1972', 'mariavera@gmail.com', 0), 6);
+INSERT INTO CLIENTE VALUES(5, DATOS('E', 21487834, 'Jenny', 'Estefanía', 'Freites', 'Martínez', 'F', '25-MAY-1979', 'jennyrejia@gmail.com', 0), 6);
+INSERT INTO CLIENTE VALUES(6, DATOS('E', 12367437, 'Manuel', 'Enrique', 'Pereira', 'Freites', 'M', '07-JUL-2006', 'elmanolo@gmail.com', 1), 6);
+
+INSERT INTO CLIENTE VALUES(7, DATOS('E', 14783232, 'Sir', 'Lewis', 'Hamilton', NULL, 'M', '07-FEB-1985', '8timesworldchamp@gmail.com', 1), 10);
+INSERT INTO CLIENTE VALUES(8, DATOS('E', 32443982, 'Juliana', 'Elizabeth', 'Hamilton', NULL, 'F', '07-MAR-1986', 'juliana@gmail.com', 0), 10);
+INSERT INTO CLIENTE VALUES(9, DATOS('E', 21453425, 'Carolina', 'Patricia', 'Hamilton', NULL, 'F', '13-AGO-1991', 'supercarol@gmail.com', 0), 10);
+
+INSERT INTO CLIENTE VALUES(10, DATOS('E', 6237275, 'Arsene', 'Francois', 'Lupin', NULL, 'M', '18-NOV-1984', 'arslupin@gmail.com', 0), 7);
+
+INSERT INTO CLIENTE VALUES(11, DATOS('E', 5434622, 'Nelson', 'Junior', 'Tellerías', 'Rosao', 'M', '28-ENE-1967', 'nelsontelleria@gmail.com', 0), 9);
+INSERT INTO CLIENTE VALUES(12, DATOS('E', 8738725, 'Deilier', 'Loquilla', 'Primera', 'Segunda', 'F', '30-AGO-2000', 'deilierprimera@gmail.com', 1), 9);
+INSERT INTO CLIENTE VALUES(13, DATOS('E', 3246324, 'Adriana', 'Antonia', 'Rodríguez', 'González', 'F', '03-ABR-2015', 'adrianarodri@gmail.com', 1), 9);
+INSERT INTO CLIENTE VALUES(14, DATOS('E', 2574321, 'Vanessa', 'Lucía', 'Soto', 'Tellerías', 'F', '08-JUL-2020', 'vanessita@gmail.com', 1), 9);
+INSERT INTO CLIENTE VALUES(15, DATOS('E', 2312447, 'Mariana', 'Emily', 'Primera', 'Rosao', 'F', '14-MAR-1998', 'escribemevale@gmail.com', 1), 9);
+
+INSERT INTO CLIENTE VALUES(16, DATOS('E', 6124347, 'Carl', 'Johnson', 'Sanders', NULL, 'M', '13-JUL-1985', 'cjsanders@gmail.com', 1), 4);
+
+INSERT INTO CLIENTE VALUES(17, DATOS('E', 9943344, 'Luke', 'Pathrick', 'Maze', NULL, 'M', '14-MAR-1996', 'luketravels@yahoo.com', 0), 4);
+
+INSERT INTO CLIENTE VALUES(18, DATOS('E', 3324341, 'Merita', 'Fátima', 'Nunez', 'Gomez', 'F', '14-MAR-1979', 'merifa@gmail.com', 0), 14);
 /
 
 /* INSERTS DE VENTA */
@@ -248,21 +261,21 @@ INSERT INTO VENTA VALUES(15, '26-DIC-2021', 324, 11);
 
 /* INSERTS DE ALIANZA */
 
-INSERT INTO ALIANZA VALUES(1, FECHA('14-DIC-2021','06-ENE-2022'), 20);
-INSERT INTO ALIANZA VALUES(2, FECHA('10-ENE-2021','10-FEB-2022'), 21);
-INSERT INTO ALIANZA VALUES(3, FECHA('04-NOV-2021','11-MAR-2022'), 22);
-INSERT INTO ALIANZA VALUES(4, FECHA('13-SEP-2021','13-DIC-2022'), 23);
-INSERT INTO ALIANZA VALUES(5, FECHA('23-DIC-2021','19-NOV-2022'), 24);
-INSERT INTO ALIANZA VALUES(6, FECHA('12-NOV-2021','20-AGO-2023'), 25);
-INSERT INTO ALIANZA VALUES(7, FECHA('19-AGO-2021','26-FEB-2022'), 26);
-INSERT INTO ALIANZA VALUES(8, FECHA('18-ABR-2021','28-ABR-2022'), 27);
-INSERT INTO ALIANZA VALUES(9, FECHA('06-MAR-2021','21-JUL-2023'), 28);
-INSERT INTO ALIANZA VALUES(10, FECHA('07-JUL-2021','07-AGO-2022'), 29);
-INSERT INTO ALIANZA VALUES(11, FECHA('08-AGO-2021','04-SEP-2024'), 30);
-INSERT INTO ALIANZA VALUES(12, FECHA('15-SEP-2021','02-NOV-2022'), 16);
-INSERT INTO ALIANZA VALUES(13, FECHA('17-OCT-2021','03-DIC-2023'), 17);
-INSERT INTO ALIANZA VALUES(14, FECHA('24-NOV-2021','18-ENE-2022'), 18);
-INSERT INTO ALIANZA VALUES(15, FECHA('28-DIC-2021','16-ENE-2022'), 19);
+execute INSERTAR_BLOB_ALIANZA(1, FECHA('14-DIC-2021','06-ENE-2022'), 'alianzas/1.jpg', 20);
+execute INSERTAR_BLOB_ALIANZA(2, FECHA('10-ENE-2021','10-FEB-2022'), 'alianzas/2.jpg', 21);
+execute INSERTAR_BLOB_ALIANZA(3, FECHA('04-NOV-2021','11-MAR-2022'), 'alianzas/3.jpg', 22);
+execute INSERTAR_BLOB_ALIANZA(4, FECHA('13-SEP-2021','13-DIC-2022'), 'alianzas/4.jpg', 23);
+execute INSERTAR_BLOB_ALIANZA(5, FECHA('23-DIC-2021','19-NOV-2022'), 'alianzas/5.jpg', 24);
+execute INSERTAR_BLOB_ALIANZA(6, FECHA('12-NOV-2021','20-AGO-2023'), 'alianzas/6.png', 25);
+execute INSERTAR_BLOB_ALIANZA(7, FECHA('19-AGO-2021','26-FEB-2022'), 'alianzas/7.jpg', 26);
+execute INSERTAR_BLOB_ALIANZA(8, FECHA('18-ABR-2021','28-ABR-2022'), 'alianzas/8.jpg', 27);
+execute INSERTAR_BLOB_ALIANZA(9, FECHA('06-MAR-2021','21-JUL-2023'), 'alianzas/9.jpg', 28);
+execute INSERTAR_BLOB_ALIANZA(10, FECHA('07-JUL-2021','07-AGO-2022'), 'alianzas/10.jpg', 29);
+execute INSERTAR_BLOB_ALIANZA(11, FECHA('08-AGO-2021','04-SEP-2024'), 'alianzas/11.jpg', 30);
+execute INSERTAR_BLOB_ALIANZA(12, FECHA('15-SEP-2021','02-NOV-2022'), 'alianzas/12.jpg', 16);
+execute INSERTAR_BLOB_ALIANZA(13, FECHA('17-OCT-2021','03-DIC-2023'), 'alianzas/13.jpg.', 17);
+execute INSERTAR_BLOB_ALIANZA(14, FECHA('24-NOV-2021','18-ENE-2022'), 'alianzas/14.jpg', 18);
+execute INSERTAR_BLOB_ALIANZA(15, FECHA('28-DIC-2021','16-ENE-2022'), 'alianzas/15.jpg', 19);
 /
 
 
@@ -271,40 +284,42 @@ INSERT INTO ALIANZA VALUES(15, FECHA('28-DIC-2021','16-ENE-2022'), 19);
 /* INSERTS DE FAMILIAR */
 
 INSERT  INTO FAMILIAR VALUES(1,2);
-INSERT  INTO FAMILIAR VALUES(1,15);
-INSERT  INTO FAMILIAR VALUES(3,2);
-INSERT  INTO FAMILIAR VALUES(2,4);
-INSERT  INTO FAMILIAR VALUES(15,2);
-INSERT  INTO FAMILIAR VALUES(13,7);
-INSERT  INTO FAMILIAR VALUES(12,8);
-INSERT  INTO FAMILIAR VALUES(9,1);
-INSERT  INTO FAMILIAR VALUES(8,3);
-INSERT  INTO FAMILIAR VALUES(3,5);
-INSERT  INTO FAMILIAR VALUES(6,8);
-INSERT  INTO FAMILIAR VALUES(4,7);
+INSERT  INTO FAMILIAR VALUES(4,5);
+INSERT  INTO FAMILIAR VALUES(4,6);
+INSERT  INTO FAMILIAR VALUES(5,6);
+INSERT  INTO FAMILIAR VALUES(7,8);
+INSERT  INTO FAMILIAR VALUES(7,9);
+INSERT  INTO FAMILIAR VALUES(8,9);
+INSERT  INTO FAMILIAR VALUES(11,12);
+INSERT  INTO FAMILIAR VALUES(11,13);
+INSERT  INTO FAMILIAR VALUES(11,14);
+INSERT  INTO FAMILIAR VALUES(11,15);
+INSERT  INTO FAMILIAR VALUES(12,13);
 INSERT  INTO FAMILIAR VALUES(12,14);
-INSERT  INTO FAMILIAR VALUES(7,12);
-INSERT  INTO FAMILIAR VALUES(1,13);
+INSERT  INTO FAMILIAR VALUES(12,15);
+INSERT  INTO FAMILIAR VALUES(13,14);
+INSERT  INTO FAMILIAR VALUES(13,15);
+INSERT  INTO FAMILIAR VALUES(14,15);
 
 /
 
 /* INSERTS DE SERVICIO */
 
-INSERT INTO SERVICIO VALUES(1, 'Conferencias ecológicas', EMPTY_BLOB(), 80, 14, 1, 8, NULL, NULL);
-INSERT INTO SERVICIO VALUES(2, 'Montañismo', EMPTY_BLOB(), 32, 2, 1, 11, NULL, NULL);
-INSERT INTO SERVICIO VALUES(3, 'Paseo a Cayos', EMPTY_BLOB(), 123, 21, 1, 7, NULL, NULL);
-INSERT INTO SERVICIO VALUES(4, 'Alojamiento', EMPTY_BLOB(), 122, 43, 1, 1, NULL, 13);
-INSERT INTO SERVICIO VALUES(5, 'Observación de Aves', EMPTY_BLOB(), 241, 43, 1, 5, NULL, NULL);
-INSERT INTO SERVICIO VALUES(6, 'Visita a haciendas', EMPTY_BLOB(), 80, 1, 1, 14, 21, NULL);
-INSERT INTO SERVICIO VALUES(7, 'Excursión local', EMPTY_BLOB(), 24, 12, 1, 15, 12, 12);
-INSERT INTO SERVICIO VALUES(8, 'Bonji', EMPTY_BLOB(), 31, 4, 1, 10, 11, 11);
-INSERT INTO SERVICIO VALUES(9, 'Conferencias educativas', EMPTY_BLOB(), 525, 45, 1, 2, 10, 10);
-INSERT INTO SERVICIO VALUES(10, 'Paracaidismo', EMPTY_BLOB(), 1531, 54, 1, 1, 1, 1);
-INSERT INTO SERVICIO VALUES(11, 'Paseo a Playa', EMPTY_BLOB(), 32, 2, 1, 2, 2, 3);
-INSERT INTO SERVICIO VALUES(12, 'Alpinismo', EMPTY_BLOB(), 675, 43, 1, 10, NULL, 3);
-INSERT INTO SERVICIO VALUES(13, 'Senderismo', EMPTY_BLOB(), 53, 5, 1, 11, 1, NULL);
-INSERT INTO SERVICIO VALUES(14, 'Picnic playero', EMPTY_BLOB(), 365, 34, 1, 3, NULL, NULL);
-INSERT INTO SERVICIO VALUES(15, 'Tour deportivo', EMPTY_BLOB(), 876, 54, 1, 12, 18, 12);
+INSERT INTO SERVICIO VALUES(1, 'Conferencias Ecológicas',  80, 14, 1, 8, NULL, NULL);
+INSERT INTO SERVICIO VALUES(2, 'Montañismo',  32, 2, 1, 11, NULL, NULL);
+INSERT INTO SERVICIO VALUES(3, 'Paseos a Cayos',  123, 21, 1, 7, 1, NULL);
+INSERT INTO SERVICIO VALUES(4, 'Alojamiento',  122, 43, 1, 1, NULL, 12);
+INSERT INTO SERVICIO VALUES(5, 'Observación de Aves',  241, 43, 1, 5, NULL, NULL);
+INSERT INTO SERVICIO VALUES(6, 'Visitas a Haciendas',  80, 1, 1, 14, NULL, NULL);
+INSERT INTO SERVICIO VALUES(7, 'Excursión Local',  24, 12, 1, 15, NULL, 13);
+INSERT INTO SERVICIO VALUES(8, 'Campamentos Ecológicos',  31, 4, 1, 10, NULL, 11);
+INSERT INTO SERVICIO VALUES(9, 'Conferencias Educativas',  525, 45, 1, 2, NULL, 10);
+INSERT INTO SERVICIO VALUES(10, 'Paracaidismo',  1531, 54, 1, 1, NULL, 1);
+INSERT INTO SERVICIO VALUES(11, 'Paseos a Playas',  32, 2, 1, 2, 2, 4);
+INSERT INTO SERVICIO VALUES(12, 'Alpinismo',  675, 43, 1, 10, NULL, 3);
+INSERT INTO SERVICIO VALUES(13, 'Senderismo',  53, 5, 1, 11, 1, NULL);
+INSERT INTO SERVICIO VALUES(14, 'Paseos a Puertos',  365, 34, 1, 3, 3, NULL);
+INSERT INTO SERVICIO VALUES(15, 'Visita Dirigida',  876, 54, 1, 12, NULL, 15);
 /
 
 /* INSERTS DE PCR */
@@ -350,21 +365,21 @@ INSERT INTO PAGO VALUES(15, 'Web', 'Dell', '10-DIC-2021', 100, 4);
 
 /* INSERTS DE DISPONIBILIDAD*/
 
-INSERT INTO DISPONIBILIDAD VALUES(1, FECHA('10-DIC-2021','10-FEB-2022'), 41, 1);
-INSERT INTO DISPONIBILIDAD VALUES(2, FECHA('10-DIC-2021','10-FEB-2022'), 32, 2);
-INSERT INTO DISPONIBILIDAD VALUES(3, FECHA('10-DIC-2021','10-FEB-2022'), 543, 3);
-INSERT INTO DISPONIBILIDAD VALUES(4, FECHA('10-DIC-2021','10-FEB-2022'), 53, 4);
-INSERT INTO DISPONIBILIDAD VALUES(5, FECHA('10-DIC-2021','10-FEB-2022'), 54, 5);
-INSERT INTO DISPONIBILIDAD VALUES(6, FECHA('10-DIC-2021','10-FEB-2022'), 76, 6);
-INSERT INTO DISPONIBILIDAD VALUES(7, FECHA('10-DIC-2021','10-FEB-2022'), 75, 7);
-INSERT INTO DISPONIBILIDAD VALUES(8, FECHA('10-DIC-2021','10-FEB-2022'), 98, 8);
-INSERT INTO DISPONIBILIDAD VALUES(9, FECHA('10-DIC-2021','10-FEB-2022'), 214, 9);
-INSERT INTO DISPONIBILIDAD VALUES(10, FECHA('10-DIC-2021','10-FEB-2022'), 12, 10);
-INSERT INTO DISPONIBILIDAD VALUES(11, FECHA('10-DIC-2021','10-FEB-2022'), 46, 11);
-INSERT INTO DISPONIBILIDAD VALUES(12, FECHA('10-DIC-2021','10-FEB-2022'), 96, 12);
-INSERT INTO DISPONIBILIDAD VALUES(13, FECHA('10-DIC-2021','10-FEB-2022'), 74, 13);
-INSERT INTO DISPONIBILIDAD VALUES(14, FECHA('10-DIC-2021','10-FEB-2022'), 64, 14);
-INSERT INTO DISPONIBILIDAD VALUES(15, FECHA('10-DIC-2021','10-FEB-2022'), 41, 15);
+INSERT INTO DISPONIBILIDAD VALUES(1, FECHA('10-DIC-2021','10-FEB-2022'), '10-DIC-2021', 41, 1);
+INSERT INTO DISPONIBILIDAD VALUES(2, FECHA('10-DIC-2021','10-FEB-2022'), '10-DIC-2021', 32, 2);
+INSERT INTO DISPONIBILIDAD VALUES(3, FECHA('10-DIC-2021','10-FEB-2022'), '10-DIC-2021', 543, 3);
+INSERT INTO DISPONIBILIDAD VALUES(4, FECHA('10-DIC-2021','10-FEB-2022'), '10-DIC-2021', 53, 4);
+INSERT INTO DISPONIBILIDAD VALUES(5, FECHA('10-DIC-2021','10-FEB-2022'), '10-DIC-2021', 54, 5);
+INSERT INTO DISPONIBILIDAD VALUES(6, FECHA('10-DIC-2021','10-FEB-2022'), '10-DIC-2021', 76, 6);
+INSERT INTO DISPONIBILIDAD VALUES(7, FECHA('10-DIC-2021','10-FEB-2022'), '10-DIC-2021', 75, 7);
+INSERT INTO DISPONIBILIDAD VALUES(8, FECHA('10-DIC-2021','10-FEB-2022'), '10-DIC-2021', 98, 8);
+INSERT INTO DISPONIBILIDAD VALUES(9, FECHA('10-DIC-2021','10-FEB-2022'), '10-DIC-2021', 214, 9);
+INSERT INTO DISPONIBILIDAD VALUES(10, FECHA('10-DIC-2021','10-FEB-2022'), '10-DIC-2021', 12, 10);
+INSERT INTO DISPONIBILIDAD VALUES(11, FECHA('10-DIC-2021','10-FEB-2022'), '10-DIC-2021', 46, 11);
+INSERT INTO DISPONIBILIDAD VALUES(12, FECHA('10-DIC-2021','10-FEB-2022'), '10-DIC-2021', 96, 12);
+INSERT INTO DISPONIBILIDAD VALUES(13, FECHA('10-DIC-2021','10-FEB-2022'), '10-DIC-2021', 74, 13);
+INSERT INTO DISPONIBILIDAD VALUES(14, FECHA('10-DIC-2021','10-FEB-2022'), '10-DIC-2021', 64, 14);
+INSERT INTO DISPONIBILIDAD VALUES(15, FECHA('10-DIC-2021','10-FEB-2022'), '10-DIC-2021', 41, 15);
 /
 
 /* INSERTS DE OBSERVACION */
@@ -410,18 +425,20 @@ INSERT INTO PAQUETE_TURISTICO VALUES(15, PRECIO(100), FECHA('20-DIC-2021','01-EN
 INSERT INTO MEDIO_PAGO VALUES(1, 'TDC', 213, 1);
 INSERT INTO MEDIO_PAGO VALUES(2, 'Cripto', 21, 2);
 INSERT INTO MEDIO_PAGO VALUES(3, 'Efectivo', 53, 3);
-INSERT INTO MEDIO_PAGO VALUES(4, 'Cripto', 213, 4);
-INSERT INTO MEDIO_PAGO VALUES(5, 'TDC', 327, 5);
-INSERT INTO MEDIO_PAGO VALUES(6, 'Cripto', 313, 6);
-INSERT INTO MEDIO_PAGO VALUES(7, 'Cripto', 221, 7);
-INSERT INTO MEDIO_PAGO VALUES(8, 'Cripto', 23, 8);
-INSERT INTO MEDIO_PAGO VALUES(9, 'TDC', 75, 9);
-INSERT INTO MEDIO_PAGO VALUES(10, 'Efectivo', 970, 10);
-INSERT INTO MEDIO_PAGO VALUES(11, 'Cripto', 123, 11);
-INSERT INTO MEDIO_PAGO VALUES(12, 'TDC', 25, 12);
-INSERT INTO MEDIO_PAGO VALUES(13, 'Cripto', 124, 13);
-INSERT INTO MEDIO_PAGO VALUES(14, 'Efectivo', 85, 14);
-INSERT INTO MEDIO_PAGO VALUES(15, 'TDC', 100, 15);
+INSERT INTO MEDIO_PAGO VALUES(4, 'Cripto', 100, 4);
+INSERT INTO MEDIO_PAGO VALUES(5, 'TDC', 113, 4);
+INSERT INTO MEDIO_PAGO VALUES(6, 'TDC', 327, 5);
+INSERT INTO MEDIO_PAGO VALUES(7, 'Cripto', 313, 6);
+INSERT INTO MEDIO_PAGO VALUES(8, 'Cripto', 221, 7);
+INSERT INTO MEDIO_PAGO VALUES(9, 'Cripto', 23, 8);
+INSERT INTO MEDIO_PAGO VALUES(10, 'TDC', 75, 9);
+INSERT INTO MEDIO_PAGO VALUES(11, 'Efectivo', 970, 10);
+INSERT INTO MEDIO_PAGO VALUES(12, 'Cripto', 123, 11);
+INSERT INTO MEDIO_PAGO VALUES(13, 'TDC', 25, 12);
+INSERT INTO MEDIO_PAGO VALUES(14, 'Cripto', 124, 13);
+INSERT INTO MEDIO_PAGO VALUES(15, 'Efectivo', 85, 14);
+INSERT INTO MEDIO_PAGO VALUES(16, 'TDC', 50, 15);
+INSERT INTO MEDIO_PAGO VALUES(17, 'Cripto', 50, 15);
 /
 
 /* INSERTS DE ASISTENCIA */
@@ -448,7 +465,20 @@ INSERT INTO ASISTENCIA VALUES(15, 1, '20-DIC-2021', 15, 15);
 
 /* INSERT DE CARACTERISTICA */
 
--- INSERT INTO CARACTERISTICA VALUES(1, 1, FECHA('20-DIC-2021', '21-DIC-2021'));
+INSERT INTO CARACTERISTICA VALUES(1,15,FECHA('20-DIC-2021','20-DIC-2021'));
+INSERT INTO CARACTERISTICA VALUES(2,8,FECHA('20-DIC-2021','20-DIC-2021'));
+INSERT INTO CARACTERISTICA VALUES(2,12,FECHA('20-DIC-2021','20-DIC-2021'));
+INSERT INTO CARACTERISTICA VALUES(3,1,FECHA('20-DIC-2021','20-DIC-2021'));
+INSERT INTO CARACTERISTICA VALUES(5,1,FECHA('20-DIC-2021','20-DIC-2021'));
+INSERT INTO CARACTERISTICA VALUES(6,3,FECHA('20-DIC-2021','20-DIC-2021'));
+INSERT INTO CARACTERISTICA VALUES(7,5,FECHA('20-DIC-2021','20-DIC-2021'));
+INSERT INTO CARACTERISTICA VALUES(8,14,FECHA('20-DIC-2021','20-DIC-2021'));
+INSERT INTO CARACTERISTICA VALUES(9,5,FECHA('20-DIC-2021','20-DIC-2021'));
+INSERT INTO CARACTERISTICA VALUES(13,6,FECHA('20-DIC-2021','20-DIC-2021'));
+INSERT INTO CARACTERISTICA VALUES(14,9,FECHA('20-DIC-2021','20-DIC-2021'));
+INSERT INTO CARACTERISTICA VALUES(14,11,FECHA('20-DIC-2021','20-DIC-2021'));
+INSERT INTO CARACTERISTICA VALUES(15,4,FECHA('20-DIC-2021','20-DIC-2021'));
+INSERT INTO CARACTERISTICA VALUES(15,10,FECHA('20-DIC-2021','20-DIC-2021'));
 
 
 /* INSERTS DE PERTENENCIA */

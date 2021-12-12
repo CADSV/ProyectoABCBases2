@@ -126,7 +126,8 @@ CREATE TABLE VENTA(
 
 CREATE TABLE ALIANZA(
     ali_id NUMBER PRIMARY KEY NOT NULL,
-    ali_fecha FECHA,
+    ali_fecha FECHA NOT NULL,
+    ali_foto BLOB DEFAULT EMPTY_BLOB(),
     emp_id NUMBER NOT NULL,
     
     CONSTRAINT fk_emp_id_ali FOREIGN KEY (emp_id) REFERENCES PROVEEDOR(emp_id)
@@ -153,7 +154,6 @@ CREATE TABLE FAMILIAR(
 CREATE TABLE SERVICIO(
     ser_id NUMBER PRIMARY KEY NOT NULL,
     ser_nombre VARCHAR2(40) NOT NULL,
-    ser_foto BLOB DEFAULT EMPTY_BLOB(),
     ser_costo_mensual NUMBER NOT NULL,
     ser_precio_unitario NUMBER NOT NULL,
     ser_duracion NUMBER,
@@ -206,6 +206,7 @@ CREATE TABLE PAGO(
 CREATE TABLE DISPONIBILIDAD(
     dis_id NUMBER PRIMARY KEY,
     dis_fecha FECHA NOT NULL,
+    dis_creacion DATE NOT NULL,
     dis_cantidad_disp NUMBER NOT NULL,
     ser_id NUMBER NOT NULL,
     
