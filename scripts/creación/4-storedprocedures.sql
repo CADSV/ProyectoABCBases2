@@ -87,12 +87,12 @@ create or replace PROCEDURE INSERTAR_BLOB_EMPRESA (id NUMBER, nombre VARCHAR2, a
 
 /
 
-create or replace PROCEDURE INSERTAR_BLOB_SERVICIO (id NUMBER, nombre VARCHAR2, archivo VARCHAR2, costo NUMBER, precio NUMBER, duracion NUMBER, desfk NUMBER, trafk NUMBER, alifk NUMBER)
+create or replace PROCEDURE INSERTAR_BLOB_ALIANZA (id NUMBER, fe FECHA, archivo VARCHAR2, empfk NUMBER)
     IS
         V_blob BLOB;
         V_bfile BFILE;
     BEGIN
-        INSERT INTO SERVICIO VALUES (id,nombre,EMPTY_BLOB(),costo,precio,duracion,desfk,trafk,alifk) RETURNING ser_foto INTO V_blob;
+        INSERT INTO ALIANZA VALUES (id,fe,EMPTY_BLOB(),empfk) RETURNING ali_foto INTO V_blob;
         V_bfile := BFILENAME('IMAGES', archivo);
         DBMS_LOB.OPEN(V_bfile, DBMS_LOB.LOB_READONLY);
         DBMS_LOB.LOADFROMFILE(V_blob, V_bfile, SYS.DBMS_LOB.GETLENGTH(V_bfile));
