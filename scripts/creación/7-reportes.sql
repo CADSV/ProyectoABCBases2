@@ -21,7 +21,7 @@ BEGIN
         WHERE   
             (di.dis_fecha.fecha_inicio >= fecha_ini OR fecha_ini IS NULL) AND
             (di.dis_fecha.fecha_fin <= fecha_f OR fecha_f IS NULL) AND
-            (se.des_id = des_id OR id_des IS NULL) AND
+            (se.des_id = id_des OR id_des IS NULL) AND
             (de.des_nombre = des_nombre OR des_nomb IS NULL)
         GROUP BY se.des_id;
 END;
@@ -34,9 +34,9 @@ BEGIN
     OPEN cursorReporte FOR
         SELECT
             de.des_nombre "Destino turístico",
-            au.fecha_desde "Fecha desde",
+            sub.fecha_desde "Fecha desde",
             sub.fecha_hasta "Fecha hasta",
-            sub.des_foto "Fotos",
+            de.des_foto "Fotos",
             de.des_video "Video",
             de.des_descripcion "Descripción"
         FROM DESTINO_TURISTICO de
@@ -46,10 +46,10 @@ BEGIN
                 MIN(di.dis_fecha.fecha_inicio) as fecha_desde,
                 MAX(di.dis_fecha.fecha_fin) as fecha_hasta
             FROM DESTINO_TURISTICO de
-            INNER JOIN DISPONIBILIDAD di
-                ON di.ser_id = se.ser_id
             INNER JOIN SERVICIO se
                 ON se.des_id = de.des_id
+            INNER JOIN DISPONIBILIDAD di
+                ON di.ser_id = se.ser_id
             WHERE 
                 (di.dis_fecha.fecha_inicio >= fecha_ini OR fecha_ini IS NULL) AND
                 (di.dis_fecha.fecha_fin <= fecha_f OR fecha_f IS NULL)
@@ -89,7 +89,7 @@ BEGIN
             WHERE   
                 (pa.paq_fecha.fecha_inicio >= fecha_ini OR fecha_ini IS NULL) AND
                 (pa.paq_fecha.fecha_fin <= fecha_f OR fecha_f IS NULL) AND
-                (pa.des_id = des_id OR id_des IS NULL) AND
+                (pa.des_id = id_des OR id_des IS NULL) AND
                 (de.des_nombre = des_nombre OR des_nomb IS NULL)
             GROUP BY pa.paq_id 
         ) sub ON sub.id_des = de.des_id;
