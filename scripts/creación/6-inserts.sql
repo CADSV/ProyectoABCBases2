@@ -138,7 +138,7 @@ execute INSERTAR_BLOB_EMPRESA(18, 'Mochileros del Ávila', 'empresas/Mochileros 
 execute INSERTAR_BLOB_EMPRESA(19, 'Desert Drift', 'empresas/Desert Drift.png');
 execute INSERTAR_BLOB_EMPRESA(20, 'Fotografía Zuliana', 'empresas/Fotografia Zuliana.png');
 execute INSERTAR_BLOB_EMPRESA(21, 'Imperio Turístico', 'empresas/Imperio Turistico.png');
-execute INSERTAR_BLOB_EMPRESA(22, 'Águilas de Montaña', 'empresas/Aguilas de Montaña.png');
+execute INSERTAR_BLOB_EMPRESA(22, 'Águilas de Montaña', 'empresas/Aguilas de Montana.png');
 execute INSERTAR_BLOB_EMPRESA(23, 'Playeros Venezuela', 'empresas/Playeros Venezuela.png');
 execute INSERTAR_BLOB_EMPRESA(24, 'Transportes Playeros', 'empresas/Transportes Playeros.png');
 execute INSERTAR_BLOB_EMPRESA(25, 'Pesqueros Asociados', 'empresas/Pesqueros Asociados.png');
@@ -146,7 +146,7 @@ execute INSERTAR_BLOB_EMPRESA(26, 'Viajes 3000', 'empresas/Viajes 3000.png');
 execute INSERTAR_BLOB_EMPRESA(27, 'Conferencias Emporio', 'empresas/Conferencias Emporio.png');
 execute INSERTAR_BLOB_EMPRESA(28, 'Ticketglobo', 'empresas/Ticketglobo.png');
 execute INSERTAR_BLOB_EMPRESA(29, 'Empresa La Poderosa', 'empresas/Empresa La Poderosa.png');
-execute INSERTAR_BLOB_EMPRESA(30, 'Amigos de Viaje', 'empresas/Amigos de Viaje.png');
+execute INSERTAR_BLOB_EMPRESA(30, 'Amigos del Viaje', 'empresas/Amigos del Viaje.png');
 /
 
 -- Logos gracias a: https://looka.com
