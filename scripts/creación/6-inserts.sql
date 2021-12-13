@@ -83,7 +83,7 @@ execute INSERTAR_BLOB_DESTINO(4,'Los Testigos','destinos/Los Testigos.jpg', 'des
 execute INSERTAR_BLOB_DESTINO(5,'Las Aves','destinos/Las Aves.jpg', 'destinos/Las Aves.gif', 'Playas sabrosas y peculiares, con diferentes tonalidades de arena.');
 execute INSERTAR_BLOB_DESTINO(6,'La Tortuga','destinos/La Tortuga.jpg', 'destinos/La Tortuga.gif', 'Su nombre lo recibe de su peculiar figura, podrás hacer muchas actividades divertidas aquí.');
 execute INSERTAR_BLOB_DESTINO(7,'Morrocoy','destinos/Morrocoy.jpg', 'destinos/Morrocoy.gif', 'Decenas de increíbles y paradisíacos cayos llenos de sabrosas y cristalinas playas con corales.');
-execute INSERTAR_BLOB_DESTINO(8,'Canaima','destinos/Canaima.jpg', 'destinos/Canaima.gif', 'El Parque Nacional más importante de Venezuela, con con los tepuyes más antiguos y la cascada más alta del planeta.');
+execute INSERTAR_BLOB_DESTINO(8,'Canaima','destinos/Canaima.jpg', 'destinos/Canaima.gif', 'El Parque Nacional más importante de Venezuela, con los tepuyes más antiguos y la cascada más alta del planeta.');
 execute INSERTAR_BLOB_DESTINO(9,'Henri Pittier','destinos/Henri Pittier.jpg', 'destinos/Henri Pittier.gif', 'Lleno de senderos, cuevas y playas que se pueden visitar y disfrutar.');
 execute INSERTAR_BLOB_DESTINO(10,'Sierra Nevada','destinos/Sierra Nevada.jpg', 'destinos/Sierra Nevada.gif', 'Los picos más altos de Venezuela, llenos de nieve, misticismo e ilusión por descubrir esta maravillosa región.');
 execute INSERTAR_BLOB_DESTINO(11,'Naiguatá','destinos/Naiguata.jpg', 'destinos/Naiguata.gif', 'El Pico más alto de la Cordillera de la Costa, con 2765 msnm, puedes ver toda la Ciudad Capital, y el Estado Vargas.');
@@ -405,7 +405,7 @@ INSERT INTO OBSERVACION VALUES(15, 2, 'Bueno', '1-ENE-2022', 13, 15)
 
 INSERT INTO PAQUETE_TURISTICO VALUES(1, PRECIO(213), FECHA('20-DIC-2021','01-ENE-2022'), 1, 12);
 INSERT INTO PAQUETE_TURISTICO VALUES(2, PRECIO(21), FECHA('20-DIC-2021','01-ENE-2022'), 2, 10);
-INSERT INTO PAQUETE_TURISTICO VALUES(3, PRECIO(53), FECHA('20-DIC-2021','01-ENE-2022'), 3, 8);
+INSERT INTO PAQUETE_TURISTICO VALUES(3, PRECIO(23), FECHA('20-DIC-2021','01-ENE-2022'), 3, 8);
 INSERT INTO PAQUETE_TURISTICO VALUES(4, PRECIO(213), FECHA('20-DIC-2021','01-ENE-2022'), 4, 9);
 INSERT INTO PAQUETE_TURISTICO VALUES(5, PRECIO(327), FECHA('20-DIC-2021','01-ENE-2022'), 5, 8);
 INSERT INTO PAQUETE_TURISTICO VALUES(6, PRECIO(313), FECHA('20-DIC-2021','01-ENE-2022'), 6, 7);
