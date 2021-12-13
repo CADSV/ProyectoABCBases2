@@ -23,7 +23,8 @@ BEGIN
             (di.dis_fecha.fecha_fin <= fecha_f OR fecha_f IS NULL) AND
             (se.des_id = id_des OR id_des IS NULL) AND
             (de.des_nombre = des_nombre OR des_nomb IS NULL)
-        GROUP BY se.des_id;
+        GROUP BY se.des_id
+        ORDER BY MIN(di.dis_creacion);
 END;
 
 /
@@ -54,7 +55,8 @@ BEGIN
                 (di.dis_fecha.fecha_inicio >= fecha_ini OR fecha_ini IS NULL) AND
                 (di.dis_fecha.fecha_fin <= fecha_f OR fecha_f IS NULL)
             GROUP BY de.des_id
-        ) sub ON sub.des_id = de.des_id;
+        ) sub ON sub.des_id = de.des_id
+        ORDER BY sub.fecha_desde;
 END;
 
 /
@@ -92,7 +94,8 @@ BEGIN
                 (pa.des_id = id_des OR id_des IS NULL) AND
                 (de.des_nombre = des_nombre OR des_nomb IS NULL)
             GROUP BY pa.paq_id 
-        ) sub ON sub.id_des = de.des_id;
+        ) sub ON sub.id_des = de.des_id
+        ORDER BY sub.inicio_fecha;
 END;
 
 /
