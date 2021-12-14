@@ -75,19 +75,19 @@ BEGIN
         FROM DESTINO_TURISTICO de 
         INNER JOIN ( 
             SELECT  
-            LISTAGG(DISTINCT de.des_id,'') as id_des, 
-            LISTAGG(DISTINCT de.des_nombre,'') as nombre_des,  
-            LISTAGG(DISTINCT pa.paq_fecha.fecha_inicio,'') as inicio_fecha,  
-            LISTAGG(DISTINCT pa.paq_fecha.fecha_fin,'') as fin_fecha, 
-            LISTAGG(DISTINCT '* '|| se.ser_nombre, chr(13) || chr(10)) WITHIN GROUP (ORDER BY se.ser_nombre) as car, 
-            LISTAGG(DISTINCT '$ ' || pa.paq_precio.precio_total || ' por persona','') as costo 
+                LISTAGG(DISTINCT de.des_id,'') as id_des, 
+                LISTAGG(DISTINCT de.des_nombre,'') as nombre_des,  
+                LISTAGG(DISTINCT pa.paq_fecha.fecha_inicio,'') as inicio_fecha,  
+                LISTAGG(DISTINCT pa.paq_fecha.fecha_fin,'') as fin_fecha, 
+                LISTAGG(DISTINCT '* '|| se.ser_nombre, chr(13) || chr(10)) WITHIN GROUP (ORDER BY se.ser_nombre) as car, 
+                LISTAGG(DISTINCT '$ ' || pa.paq_precio.precio_total || ' por persona','') as costo 
             FROM SERVICIO se 
             INNER JOIN CARACTERISTICA ca 
-            ON ca.ser_id = se.ser_id 
+                ON ca.ser_id = se.ser_id 
             INNER JOIN PAQUETE_TURISTICO pa 
-            ON pa.paq_id = ca.paq_id 
+                ON pa.paq_id = ca.paq_id 
             INNER JOIN DESTINO_TURISTICO de 
-            ON de.des_id = pa.des_id 
+                ON de.des_id = pa.des_id 
             WHERE   
                 (pa.paq_fecha.fecha_inicio >= fecha_ini OR fecha_ini IS NULL) AND
                 (pa.paq_fecha.fecha_fin <= fecha_f OR fecha_f IS NULL) AND
@@ -100,10 +100,54 @@ END;
 
 /
 
-CREATE OR REPLACE PROCEDURE REPORTE4 (cursorReporte OUT SYS_REFCURSOR)
+
+
+END;
+
+CREATE OR REPLACE PROCEDURE REPORTE4 (cursorReporte OUT SYS_REFCURSOR, fecha_ini IN DATE, fecha_f IN DATE, nombre_disp VARCHAR2)
 AS
 BEGIN
     OPEN cursorReporte FOR 
         SELECT 
-
+            de.des_nombre "Destino turistico",
+            pa.paq_fecha.fecha_inicio "Fecha inicio",
+            pa.paq_fecha.fecha_fin "Fecha fin",
+            de.des_foto "Fotos",
+            sub1.car "Características",
+            '$ ' || pa.paq_precio.precio_total || ' por persona' "Costo",
+            cl.cli_datos.dat_primer_nombre || ' ' || cl.cli_datos.dat_segundo_nombre || ' ' || cl.cli_datos.dat_primer_apellido || ' ' || cl.cli_datos.dat_segundo_apellido "Nombre Cliente",
+            cl.cli_datos.dat_email "Email",
+            sub2.medios_de_pago "Forma de Pago",
+            pg.pag_canal "Canal utilizado",
+            pg.pag_dispositivo "Dispositivo utilizado"
+        FROM PAGO pg
+        INNER JOIN PAQUETE_TURISTICO pa
+            ON pa.pag_id = pg.pag_id
+        INNER JOIN DESTINO_TURISTICO de
+            ON de.des_id = pa.des_id
+        INNER JOIN CLIENTE cl
+            ON cl.cli_id = pg.cli_id
+        INNER JOIN (
+            SELECT
+                pa.paq_id,
+                LISTAGG(DISTINCT '* '|| se.ser_nombre, chr(13) || chr(10)) WITHIN GROUP (ORDER BY se.ser_nombre) as car
+            FROM SERVICIO se
+            INNER JOIN CARACTERISTICA ca 
+                ON ca.ser_id = se.ser_id 
+            INNER JOIN PAQUETE_TURISTICO pa 
+                ON pa.paq_id = ca.paq_id 
+            GROUP BY pa.paq_id
+        ) sub1 ON sub1.paq_id = pa.paq_id
+        INNER JOIN (
+            SELECT
+                mp.pag_id,
+                LISTAGG('$ '|| ROUND(mp.med_monto,2) ||' - '|| mp.med_nombre ,chr(13) || chr(10) ) WITHIN GROUP (ORDER BY mp.med_monto) as medios_de_pago
+            FROM MEDIO_PAGO mp
+            GROUP BY mp.pag_id
+        ) sub2 ON sub2.pag_id = pg.pag_id
+        WHERE 
+            (pa.paq_fecha.fecha_inicio >= fecha_ini OR fecha_ini IS NULL) AND
+            (pa.paq_fecha.fecha_fin <= fecha_f OR fecha_f IS NULL) AND
+            (pg.pag_dispositivo = nombre_disp OR nombre_disp IS NULL)
+        ORDER BY pa.paq_fecha.fecha_inicio;
 END;
