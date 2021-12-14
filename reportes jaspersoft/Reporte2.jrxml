@@ -128,6 +128,12 @@
 				<reportElement x="1" y="0" width="85" height="81" uuid="35cfcc50-3cad-4000-934b-6d31451aab59"/>
 				<imageExpression><![CDATA["C:\\Users\\Katherine Gourmeitty\\Desktop\\SBD2\\ProyectoABCBases2\\images\\Estrella Caribena.png"]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="95" y="45" width="210" height="35" uuid="3243ccb2-3b87-470e-958d-e565fd0b8641"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[Reporte de detalle de destinos turísticos ofrecidos]]></text>
+			</staticText>
 		</band>
 	</title>
 	<columnHeader>
@@ -216,7 +222,7 @@
 	</columnHeader>
 	<detail>
 		<band height="66">
-			<textField pattern="dd/MM/yy">
+			<textField textAdjust="ScaleFont" pattern="dd/MM/yy">
 				<reportElement x="86" y="-1" width="70" height="66" uuid="884f00de-792a-4988-a475-4d80d257c7fe"/>
 				<box padding="2">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -227,7 +233,7 @@
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{Fecha desde}]]></textFieldExpression>
 			</textField>
-			<textField pattern="M/d/yy">
+			<textField textAdjust="ScaleFont" pattern="M/d/yy">
 				<reportElement x="1" y="-1" width="85" height="66" uuid="ec7a7c20-f192-4659-89fd-b7599f3ee0cd"/>
 				<box padding="2">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -238,7 +244,7 @@
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{Destino turístico}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yy">
+			<textField textAdjust="ScaleFont" pattern="dd/MM/yy">
 				<reportElement x="156" y="-1" width="70" height="66" uuid="432437cd-a470-4759-975f-1457f94fa56b"/>
 				<box padding="2">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
