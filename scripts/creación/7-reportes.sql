@@ -100,10 +100,6 @@ END;
 
 /
 
-
-
-END;
-
 CREATE OR REPLACE PROCEDURE REPORTE4 (cursorReporte OUT SYS_REFCURSOR, fecha_ini IN DATE, fecha_f IN DATE, nombre_disp VARCHAR2)
 AS
 BEGIN
