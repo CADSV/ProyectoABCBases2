@@ -65,15 +65,15 @@
 	<queryString language="plsql">
 		<![CDATA[{call REPORTE1($P{ORACLE_REF_CURSOR}, $P{Fecha_Inicio}, $P{Fecha_Fin}, $P{Id_Destino}, $P{Nombre_Destino})}]]>
 	</queryString>
-	<field name="Fecha de creación" class="java.sql.Timestamp">
+	<field name="Fecha de creación" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.name" value="Fecha de creación"/>
 		<property name="com.jaspersoft.studio.field.label" value="Fecha de creación"/>
 	</field>
-	<field name="Fecha desde" class="java.sql.Timestamp">
+	<field name="Fecha desde" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.name" value="Fecha desde"/>
 		<property name="com.jaspersoft.studio.field.label" value="Fecha desde"/>
 	</field>
-	<field name="Fecha hasta" class="java.sql.Timestamp">
+	<field name="Fecha hasta" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.name" value="Fecha hasta"/>
 		<property name="com.jaspersoft.studio.field.label" value="Fecha hasta"/>
 	</field>
@@ -123,6 +123,12 @@
 				<reportElement x="1" y="0" width="85" height="81" uuid="35cfcc50-3cad-4000-934b-6d31451aab59"/>
 				<imageExpression><![CDATA["C:\\Users\\Katherine Gourmeitty\\Desktop\\SBD2\\ProyectoABCBases2\\images\\Estrella Caribena.png"]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="95" y="45" width="210" height="35" uuid="5d1961e4-7e30-4178-b09e-d4398f1b3720"/>
+				<box rightPadding="4"/>
+				<textElement textAlignment="Justified"/>
+				<text><![CDATA[Reporte general de servicios ofrecidos por fecha de vigencia y destino]]></text>
+			</staticText>
 		</band>
 	</title>
 	<columnHeader>
@@ -197,7 +203,7 @@
 	<detail>
 		<band height="31">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
-			<textField pattern="dd/MM/yy">
+			<textField textAdjust="ScaleFont" pattern="dd/MM/yy">
 				<reportElement x="115" y="-1" width="105" height="31" uuid="884f00de-792a-4988-a475-4d80d257c7fe"/>
 				<box padding="2">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -216,10 +222,10 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Justified"/>
+				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[$F{Servicios ofrecidos}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField textAdjust="ScaleFont">
 				<reportElement x="325" y="-1" width="105" height="31" uuid="5acac6d5-9086-4e31-96fa-df44d14e7d66"/>
 				<box padding="2">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -230,7 +236,7 @@
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{Destino}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yy">
+			<textField textAdjust="ScaleFont" pattern="dd/MM/yy">
 				<reportElement x="10" y="-1" width="105" height="31" uuid="ec7a7c20-f192-4659-89fd-b7599f3ee0cd"/>
 				<box padding="2">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -241,7 +247,7 @@
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{Fecha de creación}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yy">
+			<textField textAdjust="ScaleFont" pattern="dd/MM/yy">
 				<reportElement x="220" y="-1" width="105" height="31" uuid="432437cd-a470-4759-975f-1457f94fa56b"/>
 				<box padding="2">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>

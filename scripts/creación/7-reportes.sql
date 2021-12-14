@@ -19,10 +19,10 @@ BEGIN
         INNER JOIN DISPONIBILIDAD di
             ON di.ser_id = se.ser_id
         WHERE   
-            (di.dis_fecha.fecha_inicio >= fecha_ini OR fecha_ini IS NULL) AND
-            (di.dis_fecha.fecha_fin <= fecha_f OR fecha_f IS NULL) AND
+            (TO_DATE(di.dis_fecha.fecha_inicio, 'DD-MM-YYYY') >= TO_DATE(fecha_ini, 'DD-MM-YYYY') OR fecha_ini IS NULL) AND
+            (TO_DATE(di.dis_fecha.fecha_fin, 'DD-MM-YYYY') <= TO_DATE(fecha_f, 'DD-MM-YYYY') OR fecha_f IS NULL) AND
             (se.des_id = id_des OR id_des IS NULL) AND
-            (de.des_nombre = des_nombre OR des_nomb IS NULL)
+            (de.des_nombre = des_nomb OR des_nomb IS NULL)
         GROUP BY se.des_id
         ORDER BY MIN(di.dis_creacion);
 END;
@@ -51,12 +51,12 @@ BEGIN
                 ON se.des_id = de.des_id
             INNER JOIN DISPONIBILIDAD di
                 ON di.ser_id = se.ser_id
-            WHERE 
-                (di.dis_fecha.fecha_inicio >= fecha_ini OR fecha_ini IS NULL) AND
-                (di.dis_fecha.fecha_fin <= fecha_f OR fecha_f IS NULL)
             GROUP BY de.des_id
             ORDER BY fecha_desde
-        ) sub ON sub.des_id = de.des_id;
+        ) sub ON sub.des_id = de.des_id
+        WHERE 
+            (TO_DATE(sub.fecha_desde, 'DD-MM-YYYY') >= TO_DATE(fecha_ini, 'DD-MM-YYYY') OR fecha_ini IS NULL) AND
+            (TO_DATE(sub.fecha_hasta, 'DD-MM-YYYY') <= TO_DATE(fecha_f, 'DD-MM-YYYY') OR fecha_f IS NULL);
 END;
 
 /
@@ -79,7 +79,7 @@ BEGIN
                 LISTAGG(DISTINCT de.des_nombre,'') as nombre_des,  
                 LISTAGG(DISTINCT pa.paq_fecha.fecha_inicio,'') as inicio_fecha,  
                 LISTAGG(DISTINCT pa.paq_fecha.fecha_fin,'') as fin_fecha, 
-                LISTAGG(DISTINCT '* '|| se.ser_nombre, chr(13) || chr(10)) WITHIN GROUP (ORDER BY se.ser_nombre) as car, 
+                LISTAGG(DISTINCT '- '|| se.ser_nombre, chr(13) || chr(10)) WITHIN GROUP (ORDER BY se.ser_nombre) as car, 
                 LISTAGG(DISTINCT '$ ' || pa.paq_precio.precio_total || ' por persona','') as costo 
             FROM SERVICIO se 
             INNER JOIN CARACTERISTICA ca 
@@ -89,10 +89,10 @@ BEGIN
             INNER JOIN DESTINO_TURISTICO de 
                 ON de.des_id = pa.des_id 
             WHERE   
-                (pa.paq_fecha.fecha_inicio >= fecha_ini OR fecha_ini IS NULL) AND
-                (pa.paq_fecha.fecha_fin <= fecha_f OR fecha_f IS NULL) AND
+                (TO_DATE(pa.paq_fecha.fecha_inicio, 'DD-MM-YYYY') >= TO_DATE(fecha_ini, 'DD-MM-YYYY') OR fecha_ini IS NULL) AND
+                (TO_DATE(pa.paq_fecha.fecha_fin, 'DD-MM-YYYY') <= TO_DATE(fecha_f, 'DD-MM-YYYY') OR fecha_f IS NULL) AND
                 (pa.des_id = id_des OR id_des IS NULL) AND
-                (de.des_nombre = des_nombre OR des_nomb IS NULL)
+                (de.des_nombre = des_nomb OR des_nomb IS NULL)
             GROUP BY pa.paq_id 
         ) sub ON sub.id_des = de.des_id
         ORDER BY sub.inicio_fecha;
@@ -126,7 +126,7 @@ BEGIN
         INNER JOIN (
             SELECT
                 pa.paq_id,
-                LISTAGG(DISTINCT '* '|| se.ser_nombre, chr(13) || chr(10)) WITHIN GROUP (ORDER BY se.ser_nombre) as car
+                LISTAGG(DISTINCT se.ser_nombre, chr(13) || chr(10)) WITHIN GROUP (ORDER BY se.ser_nombre) as car
             FROM SERVICIO se
             INNER JOIN CARACTERISTICA ca 
                 ON ca.ser_id = se.ser_id 
@@ -142,8 +142,8 @@ BEGIN
             GROUP BY mp.pag_id
         ) sub2 ON sub2.pag_id = pg.pag_id
         WHERE 
-            (pa.paq_fecha.fecha_inicio >= fecha_ini OR fecha_ini IS NULL) AND
-            (pa.paq_fecha.fecha_fin <= fecha_f OR fecha_f IS NULL) AND
+            (TO_DATE(pa.paq_fecha.fecha_inicio, 'DD-MM-YYYY') >= TO_DATE(fecha_ini, 'DD-MM-YYYY') OR fecha_ini IS NULL) AND
+            (TO_DATE(pa.paq_fecha.fecha_fin, 'DD-MM-YYYY') <= TO_DATE(fecha_f, 'DD-MM-YYYY') OR fecha_f IS NULL) AND
             (pg.pag_dispositivo = nombre_disp OR nombre_disp IS NULL)
         ORDER BY pa.paq_fecha.fecha_inicio;
 END;
