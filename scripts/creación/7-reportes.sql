@@ -55,8 +55,8 @@ BEGIN
                 (di.dis_fecha.fecha_inicio >= fecha_ini OR fecha_ini IS NULL) AND
                 (di.dis_fecha.fecha_fin <= fecha_f OR fecha_f IS NULL)
             GROUP BY de.des_id
-        ) sub ON sub.des_id = de.des_id
-        ORDER BY sub.fecha_desde;
+            ORDER BY fecha_desde
+        ) sub ON sub.des_id = de.des_id;
 END;
 
 /
