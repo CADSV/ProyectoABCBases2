@@ -313,14 +313,14 @@ INSERT INTO SERVICIO VALUES(5, 'Observación de Aves',  241, 43, 1, 5, NULL, NUL
 INSERT INTO SERVICIO VALUES(6, 'Visitas a Haciendas',  80, 1, 1, 14, NULL, NULL);
 INSERT INTO SERVICIO VALUES(7, 'Excursión Local',  24, 12, 1, 15, NULL, 13);
 INSERT INTO SERVICIO VALUES(8, 'Campamentos Ecológicos',  31, 4, 1, 10, NULL, 11);
-INSERT INTO SERVICIO VALUES(9, 'Conferencias Educativas',  525, 45, 1, 2, NULL, 27);
+INSERT INTO SERVICIO VALUES(9, 'Conferencias Educativas',  525, 45, 1, 2, NULL, 8);
 INSERT INTO SERVICIO VALUES(10, 'Paracaidismo',  1531, 54, 1, 1, NULL, 1);
 INSERT INTO SERVICIO VALUES(11, 'Paseos a Playas',  32, 2, 1, 2, 2, 4);
 INSERT INTO SERVICIO VALUES(12, 'Alpinismo',  675, 43, 1, 10, NULL, 3);
 INSERT INTO SERVICIO VALUES(13, 'Senderismo',  53, 5, 1, 11, 1, NULL);
 INSERT INTO SERVICIO VALUES(14, 'Paseos a Puertos',  365, 34, 1, 3, 3, NULL);
 INSERT INTO SERVICIO VALUES(15, 'Visita Dirigida',  876, 54, 1, 12, NULL, 15);
-INSERT INTO SERVICIO VALUES(16, 'Conferencias de Campismo',  231, 30, 1, 9, NULL, 27);
+INSERT INTO SERVICIO VALUES(16, 'Conferencias de Campismo',  231, 30, 1, 9, NULL, 8);
 INSERT INTO SERVICIO VALUES(17, 'Paseos a Playas',  246, 29, 1, 6, 4, NULL);
 INSERT INTO SERVICIO VALUES(18, 'Paseos a Puertos',  433, 75, 1, 5, 5, NULL);
 INSERT INTO SERVICIO VALUES(19, 'Campamentos Ecológicos',  27, 52, 1, 13, NULL, NULL);
