@@ -218,7 +218,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_ANALISIS AS
             cont := cont + 1;
         END LOOP;
 
-        UPDATE DISPONIBILIDAD di SET di.dis_fecha.fecha_fin = (dis_fecha.fecha_fin + 365) WHERE di.dis_fecha.fecha_fin > SYSDATE;
+        UPDATE DISPONIBILIDAD di SET di.dis_fecha.fecha_fin = (di.dis_fecha.fecha_fin + 365) WHERE di.dis_fecha.fecha_fin > SYSDATE;
         DBMS_OUTPUT.PUT_LINE('Se renovaron las disponibilidades de todos los demás servicios por 1 año.');
         DBMS_OUTPUT.PUT_LINE('');
         DBMS_OUTPUT.PUT_LINE('Fin de la simulación.');
