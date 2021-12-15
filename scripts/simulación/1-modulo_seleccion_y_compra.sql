@@ -48,7 +48,6 @@ CREATE OR REPLACE PACKAGE BODY MODULO_SELECCION_COMPRA AS
         solo_servicio SERVICIO%rowtype;
         monto_abonado NUMBER := 0;
         limite_destinos NUMBER;
-        family CLIENTE%rowtype;
     BEGIN
         FOR i IN 1..paquetes_a_comprar LOOP
             flag := 1;
@@ -172,20 +171,6 @@ CASE canal_pago
                         UPDATE DISPONIBILIDAD disp SET disp.DIS_CANTIDAD_DISP = disp.DIS_CANTIDAD_DISP - 1 WHERE disp.SER_ID = lista_servicios(i).SER_ID;
                     end loop;
 
-                    /* SI TIENE FAMILIARES, LES COMPRA LO MISMO */
-                    FOR fam IN (SELECT CLI_ID2 as cli_fam FROM FAMILIAR WHERE CLI_ID1 = cli.CLI_ID) LOOP
-                        SELECT * INTO family FROM CLIENTE WHERE CLI_ID = fam.cli_fam;
-                        DBMS_OUTPUT.PUT_LINE('En este viaje le acompañará su familiar '||family.CLI_DATOS.DAT_PRIMER_NOMBRE||' '||family.CLI_DATOS.DAT_PRIMER_APELLIDO);
-
-                        INSERT INTO PAGO VALUES (PAG_ID_SEQ.nextVal, tipo_canal_pago, disp_canal_pago, fecha_simulacion, monto_total, cli.CLI_ID) RETURNING PAG_ID INTO id_pago;
-                        INSERT INTO MEDIO_PAGO VALUES(MED_ID_SEQ.nextval, tipo_medio_pago, monto_total, id_pago);
-                        INSERT INTO PAQUETE_TURISTICO VALUES (PAQ_ID_SEQ.nextval, PRECIO(monto_total), FECHA(fecha_inicio, fecha_fin), id_pago, destino_aleatorio.DES_ID) RETURNING PAG_ID INTO id_paquete;
-                        INSERT INTO PERTENENCIA VALUES(family.CLI_ID, id_paquete);
-                        FOR i IN 1..contador_servicios LOOP
-                            INSERT INTO CARACTERISTICA VALUES (id_paquete, lista_servicios(i).SER_ID, FECHA(fecha_fin,fecha_fin));
-                            UPDATE DISPONIBILIDAD disp SET disp.DIS_CANTIDAD_DISP = disp.DIS_CANTIDAD_DISP - 1 WHERE disp.SER_ID = lista_servicios(i).SER_ID;
-                        end loop;
-                    end loop;
 
                     IF(limite_destinos != 0)THEN
                         DBMS_OUTPUT.PUT_LINE('-------------------------------------------------');
