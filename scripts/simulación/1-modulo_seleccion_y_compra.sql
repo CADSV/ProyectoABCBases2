@@ -210,6 +210,9 @@ PROCEDURE  inicio_simulacion(fecha_inicio DATE DEFAULT SYSDATE, num_clientes NUM
         IS
             fecha_fin DATE;
             primer_paquete NUMBER := 0;
+            costomant NUMBER;
+            conceptomant VARCHAR(40);
+            fechamant DATE;
         BEGIN
             fecha_fin := ADD_MONTHS(fecha_inicio,4);
             DBMS_OUTPUT.PUT_LINE('*****************************************************');
@@ -242,12 +245,37 @@ PROCEDURE  inicio_simulacion(fecha_inicio DATE DEFAULT SYSDATE, num_clientes NUM
                 seleccion_clientes(cliente_aleatorio, primer_paquete, fecha_inicio);
             END LOOP;
 
-               /* LLAMAMOS AL MODULO DE VIAJE Y OBSERVACION */
-                MODULO_VIAJE.INICIO_VIAJE(primer_paquete);
-                MODULO_OBSERVACION.INICIO_OBSERVACION(primer_paquete);
-                MODULO_ANALISIS.analisis_servicios(fecha_inicio,fecha_fin);
+            /* LLAMAMOS AL MODULO DE VIAJE Y OBSERVACION */
+            MODULO_VIAJE.INICIO_VIAJE(primer_paquete);
+            MODULO_OBSERVACION.INICIO_OBSERVACION(primer_paquete);
+            MODULO_ANALISIS.analisis_servicios(fecha_inicio,fecha_fin);
 
-
+            FOR barco IN 
+            (SELECT cr.tra_id, tr.tra_nombre, cr.cru_mant.fecha_prox_mant AS fmant 
+            FROM CRUCERO cr 
+            INNER JOIN TRANSPORTE tr 
+            ON tr.tra_id = cr.tra_id 
+            WHERE cr.cru_mant.fecha_prox_mant <= '14-ABR-2022') 
+            LOOP 
+                costomant := ROUND(dbms_random.value(50,15000),0); 
+                fechamant := barco.fmant; 
+                IF(costomant <= 500) THEN 
+                    conceptomant := 'Revisión General'; 
+                ELSIF (costomant <= 12500) THEN 
+                    conceptomant := 'Reparación Parcial'; 
+                ELSE 
+                    conceptomant := 'Reparación Total'; 
+                END IF; 
+                INSERT INTO MANTENIMIENTO VALUES (man_id_seq.nextVal, fechamant, conceptomant, costomant, barco.tra_id); 
+                dbms_output.put_line('Se le hizo mantenimiento al crucero '||barco.tra_nombre||' el día '||fechamant||' por concepto de '||conceptomant||' con un costo de $ '||costomant); 
+                fechamant := TDA_MANTENIMIENTO.fechaProxMant(fechamant,ROUND(dbms_random.value(1,4),0)); 
+                UPDATE CRUCERO cr SET cr.cru_mant.fecha_prox_mant = fechamant; 
+                dbms_output.put_line('Su próximo mantenimiento será el '||fechamant); 
+                dbms_output.put_line(''); 
+            END LOOP; 
+            dbms_output.put_line('');
+            DBMS_OUTPUT.PUT_LINE('Fin de la simulación');
+            DBMS_OUTPUT.PUT_LINE('----------------------------------------------------------------------------------');
         END;
 
 END;

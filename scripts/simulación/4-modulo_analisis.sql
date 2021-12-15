@@ -222,7 +222,6 @@ CREATE OR REPLACE PACKAGE BODY MODULO_ANALISIS AS
         DBMS_OUTPUT.PUT_LINE('');
         DBMS_OUTPUT.PUT_LINE('Se renovaron las disponibilidades de todos los demás servicios por 1 año.');
         DBMS_OUTPUT.PUT_LINE('');
-        DBMS_OUTPUT.PUT_LINE('Fin de la simulación.');
         DBMS_OUTPUT.PUT_LINE('----------------------------------------------------------------------------------'); 
     END;
 END;
