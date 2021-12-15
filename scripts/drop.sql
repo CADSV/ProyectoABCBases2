@@ -1,4 +1,7 @@
 -- BORRAR TODO EN ORDEN
+
+DROP PACKAGE MODULO_SELECCION_COMPRA;
+
 DROP TRIGGER sc_sumar_precio;
 DROP TRIGGER fecha_caracteristica;
 DROP TRIGGER fecha_disponibilidad;
