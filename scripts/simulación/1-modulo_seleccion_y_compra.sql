@@ -1,14 +1,14 @@
 CREATE OR REPLACE PACKAGE MODULO_SELECCION_COMPRA IS
     PROCEDURE inicio_simulacion(fecha_inicio DATE DEFAULT SYSDATE, num_clientes NUMBER);
-    PROCEDURE seleccion_clientes(cli CLIENTE%rowtype);
-    PROCEDURE comprar_paquete_solo(cli CLIENTE%rowtype);
+    PROCEDURE seleccion_clientes(cli CLIENTE%rowtype, primer_paquete IN OUT NUMBER, fecha_simulacion DATE);
+    PROCEDURE comprar_paquete_solo(cli CLIENTE%rowtype, primer_paquete IN OUT NUMBER, fecha_simulacion DATE);
 END;
 /
 
 CREATE OR REPLACE PACKAGE BODY MODULO_SELECCION_COMPRA AS
 
     /* PROCEDURE PARA SELECCIONAR QUIÉNES SERÁN LOS CLIENTES COMPRADORES*/
-    PROCEDURE seleccion_clientes(cli CLIENTE%rowtype)
+    PROCEDURE seleccion_clientes(cli CLIENTE%rowtype, primer_paquete IN OUT NUMBER, fecha_simulacion DATE)
         IS
             meses_vividos NUMBER := 0;
             fam1 FAMILIAR%rowtype;
@@ -16,13 +16,13 @@ CREATE OR REPLACE PACKAGE BODY MODULO_SELECCION_COMPRA AS
         BEGIN
             SELECT MONTHS_BETWEEN(sysdate, cli.CLI_DATOS.DAT_FECHA_NACIMIENTO) INTO meses_vividos FROM dual;
             IF(meses_vividos >= 216)THEN
-                comprar_paquete_solo(cli);
+                comprar_paquete_solo(cli, primer_paquete, fecha_simulacion);
             end if;
 
         END;
 
 /* PROCEDIMIENTO PARA QUE EL USUARIO SOLITARIO, COMPRE SUS PAQUETES */
-    PROCEDURE comprar_paquete_solo(cli CLIENTE%rowtype)
+    PROCEDURE comprar_paquete_solo(cli CLIENTE%rowtype, primer_paquete IN OUT NUMBER,fecha_simulacion DATE)
     IS
         flag NUMBER := 1;
         flag_servicio NUMBER :=1;
@@ -48,17 +48,18 @@ CREATE OR REPLACE PACKAGE BODY MODULO_SELECCION_COMPRA AS
         solo_servicio SERVICIO%rowtype;
         monto_abonado NUMBER := 0;
         limite_destinos NUMBER;
+        family CLIENTE%rowtype;
     BEGIN
         FOR i IN 1..paquetes_a_comprar LOOP
             flag := 1;
             SELECT * INTO destino_aleatorio FROM DESTINO_TURISTICO ORDER BY DBMS_RANDOM.RANDOM ASC FETCH FIRST 1 ROWS ONLY;
             WHILE flag = 1 LOOP
                 es_disponible := 1;
-                dias_antes_viaje  := round(DBMS_RANDOM.VALUE(1,20));
+                dias_antes_viaje  := round(DBMS_RANDOM.VALUE(25,60));
                 paquetes_a_comprar := round(DBMS_RANDOM.VALUE (1, 3));
-                dias_viaje  := round(DBMS_RANDOM.VALUE(21,40));
-                SELECT (SYSDATE + dias_antes_viaje) INTO fecha_inicio FROM dual;
-                SELECT (SYSDATE + dias_viaje) INTO fecha_fin FROM dual;
+                dias_viaje  := round(DBMS_RANDOM.VALUE(61,90));
+                fecha_inicio := fecha_simulacion + dias_antes_viaje;
+                fecha_fin := fecha_simulacion + dias_viaje;
 
                 FOR paquetes_comprados IN (SELECT * FROM PAQUETE_TURISTICO paq INNER JOIN PERTENENCIA per on paq.PAQ_ID = per.PAQ_ID WHERE cli.CLI_ID = per.CLI_ID) LOOP
                     IF( ((TO_DATE(fecha_inicio, 'DD-MM-YYYY') > TO_DATE(paquetes_comprados.PAQ_FECHA.FECHA_INICIO, 'DD-MM-YYYY')) AND (TO_DATE(fecha_inicio, 'DD-MM-YYYY') < TO_DATE(paquetes_comprados.PAQ_FECHA.FECHA_FIN, 'DD-MM-YYYY')) ) OR ((TO_DATE(fecha_fin, 'DD-MM-YYYY') > TO_DATE(paquetes_comprados.PAQ_FECHA.FECHA_INICIO, 'DD-MM-YYYY')) AND (TO_DATE(fecha_fin, 'DD-MM-YYYY') < TO_DATE(paquetes_comprados.PAQ_FECHA.FECHA_FIN, 'DD-MM-YYYY'))) ) THEN
@@ -127,7 +128,7 @@ CASE canal_pago
                     end if;
 
 
-                    INSERT INTO PAGO VALUES (PAG_ID_SEQ.nextVal, tipo_canal_pago, disp_canal_pago, SYSDATE, monto_total, cli.CLI_ID) RETURNING PAG_ID INTO id_pago;
+                    INSERT INTO PAGO VALUES (PAG_ID_SEQ.nextVal, tipo_canal_pago, disp_canal_pago, fecha_simulacion, monto_total, cli.CLI_ID) RETURNING PAG_ID INTO id_pago;
 
                     /* AHORA GENERAR MEDIOS DE  PAGOS ALEATORIOS*/
                     FOR i IN 1..medios_pago LOOP
@@ -161,11 +162,29 @@ CASE canal_pago
                     end loop;
 
                     INSERT INTO PAQUETE_TURISTICO VALUES (PAQ_ID_SEQ.nextval, PRECIO(monto_total), FECHA(fecha_inicio, fecha_fin), id_pago, destino_aleatorio.DES_ID) RETURNING PAG_ID INTO id_paquete;
+                    IF(primer_paquete = 0)THEN
+                        primer_paquete := id_paquete;
+                    end if;
                     INSERT INTO PERTENENCIA VALUES(cli.CLI_ID, id_paquete);
 
                     FOR i IN 1..contador_servicios LOOP
                         INSERT INTO CARACTERISTICA VALUES (id_paquete, lista_servicios(i).SER_ID, FECHA(fecha_fin,fecha_fin));
                         UPDATE DISPONIBILIDAD disp SET disp.DIS_CANTIDAD_DISP = disp.DIS_CANTIDAD_DISP - 1 WHERE disp.SER_ID = lista_servicios(i).SER_ID;
+                    end loop;
+
+                    /* SI TIENE FAMILIARES, LES COMPRA LO MISMO */
+                    FOR fam IN (SELECT CLI_ID2 as cli_fam FROM FAMILIAR WHERE CLI_ID1 = cli.CLI_ID) LOOP
+                        SELECT * INTO family FROM CLIENTE WHERE CLI_ID = fam.cli_fam;
+                        DBMS_OUTPUT.PUT_LINE('En este viaje le acompañará su familiar '||family.CLI_DATOS.DAT_PRIMER_NOMBRE||' '||family.CLI_DATOS.DAT_PRIMER_APELLIDO);
+
+                        INSERT INTO PAGO VALUES (PAG_ID_SEQ.nextVal, tipo_canal_pago, disp_canal_pago, fecha_simulacion, monto_total, cli.CLI_ID) RETURNING PAG_ID INTO id_pago;
+                        INSERT INTO MEDIO_PAGO VALUES(MED_ID_SEQ.nextval, tipo_medio_pago, monto_total, id_pago);
+                        INSERT INTO PAQUETE_TURISTICO VALUES (PAQ_ID_SEQ.nextval, PRECIO(monto_total), FECHA(fecha_inicio, fecha_fin), id_pago, destino_aleatorio.DES_ID) RETURNING PAG_ID INTO id_paquete;
+                        INSERT INTO PERTENENCIA VALUES(family.CLI_ID, id_paquete);
+                        FOR i IN 1..contador_servicios LOOP
+                            INSERT INTO CARACTERISTICA VALUES (id_paquete, lista_servicios(i).SER_ID, FECHA(fecha_fin,fecha_fin));
+                            UPDATE DISPONIBILIDAD disp SET disp.DIS_CANTIDAD_DISP = disp.DIS_CANTIDAD_DISP - 1 WHERE disp.SER_ID = lista_servicios(i).SER_ID;
+                        end loop;
                     end loop;
 
                     IF(limite_destinos != 0)THEN
@@ -190,6 +209,7 @@ CASE canal_pago
 PROCEDURE  inicio_simulacion(fecha_inicio DATE DEFAULT SYSDATE, num_clientes NUMBER)
         IS
             fecha_fin DATE;
+            primer_paquete NUMBER := 0;
         BEGIN
             fecha_fin := ADD_MONTHS(fecha_inicio,4);
             DBMS_OUTPUT.PUT_LINE('*****************************************************');
@@ -219,8 +239,12 @@ PROCEDURE  inicio_simulacion(fecha_inicio DATE DEFAULT SYSDATE, num_clientes NUM
             dbms_output.put_line(' ');
 
             FOR cliente_aleatorio IN (SELECT * FROM CLIENTE ORDER BY DBMS_RANDOM.RANDOM ASC FETCH FIRST num_clientes ROWS ONLY) LOOP
-                seleccion_clientes(cliente_aleatorio);
+                seleccion_clientes(cliente_aleatorio, primer_paquete, fecha_inicio);
             END LOOP;
+
+               /* LLAMAMOS AL MODULO DE VIAJE Y OBSERVACION */
+                MODULO_VIAJE.INICIO_VIAJE(primer_paquete);
+                MODULO_OBSERVACION.INICIO_OBSERVACION(primer_paquete);
 
         END;
 
