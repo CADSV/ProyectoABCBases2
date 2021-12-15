@@ -245,6 +245,8 @@ PROCEDURE  inicio_simulacion(fecha_inicio DATE DEFAULT SYSDATE, num_clientes NUM
                /* LLAMAMOS AL MODULO DE VIAJE Y OBSERVACION */
                 MODULO_VIAJE.INICIO_VIAJE(primer_paquete);
                 MODULO_OBSERVACION.INICIO_OBSERVACION(primer_paquete);
+                MODULO_ANALISIS.analisis_servicios(fecha_inicio,fecha_fin);
+
 
         END;
 
