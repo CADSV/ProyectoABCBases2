@@ -48,7 +48,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_ANALISIS AS
             FETCH FIRST 3 ROWS ONLY)
             sub ON sub.ser_id = se.ser_id)
         LOOP
-            DBMS_OUTPUT.PUT_LINE('El servicio número '||cont||' más demandado es '||servicio_mas_demandado.ser_nombre||' en '||servicio_mas_demandado.des_nombre);
+            DBMS_OUTPUT.PUT_LINE('El servicio número '||cont||' más demandado es '||servicio_mas_demandado.ser_nombre||' en '||servicio_mas_demandado.des_nombre||' con '||servicio_mas_demandado.cantidad||' compras.');
             dbms_output.put_line('');
             idali := ali_id_seq.nextVal;
             INSERT INTO ALIANZA VALUES(idali, FECHA(fecha_f,fecha_f + 365*2), EMPTY_BLOB(), ROUND(dbms_random.value(16,30),0));
@@ -100,7 +100,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_ANALISIS AS
             FETCH FIRST 3 ROWS ONLY)
             sub ON sub.ser_id = se.ser_id)
         LOOP
-            DBMS_OUTPUT.PUT_LINE('El servicio número '||cont||' mejor calificado es '||servicio_mejor_calificado.ser_nombre||' en '||servicio_mejor_calificado.des_nombre);
+            DBMS_OUTPUT.PUT_LINE('El servicio número '||cont||' mejor calificado es '||servicio_mejor_calificado.ser_nombre||' en '||servicio_mejor_calificado.des_nombre||' con un promedio de '||ROUND(servicio_mejor_calificado.calificacion,1)||' puntos de 3.');
             dbms_output.put_line('');
             idali := ali_id_seq.nextVal;
             INSERT INTO ALIANZA VALUES(idali, FECHA(fecha_f,fecha_f + 365*2), EMPTY_BLOB(), ROUND(dbms_random.value(16,30),0));
@@ -152,7 +152,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_ANALISIS AS
             FETCH FIRST 2 ROWS ONLY)
             sub ON sub.ser_id = se.ser_id)
         LOOP
-            DBMS_OUTPUT.PUT_LINE('El servicio número '||cont||' menos demandado es '||servicio_menos_demandado.ser_nombre||' en '||servicio_menos_demandado.des_nombre);
+            DBMS_OUTPUT.PUT_LINE('El servicio número '||cont||' menos demandado es '||servicio_menos_demandado.ser_nombre||' en '||servicio_menos_demandado.des_nombre||' con '||servicio_menos_demandado.cantidad||' compras.');
             DBMS_OUTPUT.PUT_LINE('');
             UPDATE DISPONIBILIDAD di SET di.dis_fecha.fecha_fin = SYSDATE WHERE di.ser_id = servicio_menos_demandado.ser_id;
             DBMS_OUTPUT.PUT_LINE('Se descontinuó el servicio.');
@@ -180,7 +180,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_ANALISIS AS
             FETCH FIRST 2 ROWS ONLY)
             sub ON sub.ser_id = se.ser_id)
         LOOP
-            DBMS_OUTPUT.PUT_LINE('El servicio número '||cont||' peor calificado es'||servicio_peor_calificado.ser_nombre||' en '||servicio_peor_calificado.des_nombre);
+            DBMS_OUTPUT.PUT_LINE('El servicio número '||cont||' peor calificado es '||servicio_peor_calificado.ser_nombre||' en '||servicio_peor_calificado.des_nombre||' con un promedio de '||ROUND(servicio_peor_calificado.calificacion,1)||' puntos de 3.');
             DBMS_OUTPUT.PUT_LINE('');
             UPDATE DISPONIBILIDAD di SET di.dis_fecha.fecha_fin = SYSDATE WHERE di.ser_id = servicio_peor_calificado.ser_id;
             DBMS_OUTPUT.PUT_LINE('Se descontinuó el servicio.');
@@ -210,7 +210,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_ANALISIS AS
             ORDER BY relacionpc ASC
             FETCH FIRST 2 ROWS ONLY)
         LOOP
-            DBMS_OUTPUT.PUT_LINE('El servicio número '||cont||' de peor relacion ganancia-costo es '||servicio_peor_ganancia.ser_nombre||' en '||servicio_peor_ganancia.des_nombre);
+            DBMS_OUTPUT.PUT_LINE('El servicio número '||cont||' de peor relacion ganancia-costo es '||servicio_peor_ganancia.ser_nombre||' en '||servicio_peor_ganancia.des_nombre||' con un neto de $ '||servicio_peor_ganancia.relacionpc||'.');
             DBMS_OUTPUT.PUT_LINE('');
             UPDATE DISPONIBILIDAD di SET di.dis_fecha.fecha_fin = SYSDATE WHERE di.ser_id = servicio_peor_ganancia.ser_id;
             DBMS_OUTPUT.PUT_LINE('Se descontinuó el servicio.');
@@ -219,6 +219,7 @@ CREATE OR REPLACE PACKAGE BODY MODULO_ANALISIS AS
         END LOOP;
 
         UPDATE DISPONIBILIDAD di SET di.dis_fecha.fecha_fin = (di.dis_fecha.fecha_fin + 365) WHERE di.dis_fecha.fecha_fin > SYSDATE;
+        DBMS_OUTPUT.PUT_LINE('');
         DBMS_OUTPUT.PUT_LINE('Se renovaron las disponibilidades de todos los demás servicios por 1 año.');
         DBMS_OUTPUT.PUT_LINE('');
         DBMS_OUTPUT.PUT_LINE('Fin de la simulación.');
