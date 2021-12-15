@@ -217,8 +217,8 @@ PROCEDURE  inicio_simulacion(fecha_inicio DATE DEFAULT SYSDATE, num_clientes NUM
             DBMS_OUTPUT.PUT_LINE('* BIENVENIDO A LA SIMULACIÓN DE ESTRELLA CARIBEÑA   *');
             DBMS_OUTPUT.PUT_LINE('*                                                   *');
             DBMS_OUTPUT.PUT_LINE('* Esta simulación tendrá como fechas:               *');
-            DBMS_OUTPUT.PUT_LINE('* Desde:' ||fecha_inicio||'                                                  *');
-            DBMS_OUTPUT.PUT_LINE('* Hasta:' ||fecha_fin|| '                                                 *');
+            DBMS_OUTPUT.PUT_LINE('* Desde:' ||fecha_inicio||'                                    *');
+            DBMS_OUTPUT.PUT_LINE('* Hasta:' ||fecha_fin|| '                                     *');
             DBMS_OUTPUT.PUT_LINE('*                                                   *');
             DBMS_OUTPUT.PUT_LINE('Con un total de '||num_clientes||' clientes.                        *');
             DBMS_OUTPUT.PUT_LINE('*                                                   *');
