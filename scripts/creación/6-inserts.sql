@@ -96,7 +96,7 @@ execute INSERTAR_BLOB_DESTINO(15,'Mochima','destinos/Mochima.jpg', 'destinos/Moc
 
 /* INSERTS DE PAIS */
 
-execute INSERTAR_BLOB_PAIS(1, 'Venezuela', 'paises/Alemania.png');
+execute INSERTAR_BLOB_PAIS(1, 'Venezuela', 'paises/Venezuela.png');
 execute INSERTAR_BLOB_PAIS(2, 'Bélgica', 'paises/Belgica.png');
 execute INSERTAR_BLOB_PAIS(3, 'Alemania', 'paises/Alemania.png');
 execute INSERTAR_BLOB_PAIS(4, 'Estados Unidos', 'paises/Estados Unidos.png');

@@ -312,13 +312,12 @@ CREATE OR REPLACE DIRECTORY IMAGES AS 'C:\Users\user\Desktop\Alejandro\Universid
 */
 
 --CARLOS:
-/*
-CREATE OR REPLACE DIRECTORY IMAGES AS 'C:\Users\Carlos Doffiny\Desktop\UCAB\7mo Semestre\Bases II\Proyecto\Imagenes';
-*/
 
-/*
-GRANT READ, WRITE ON DIRECTORY IMAGES TO system;
-*/
+-- CREATE OR REPLACE DIRECTORY IMAGES AS 'C:\Users\Carlos Doffiny\Desktop\UCAB\7mo Semestre\Bases II\Proyecto\Imagenes';
+
+
+
+-- GRANT READ, WRITE ON DIRECTORY IMAGES TO system;
 
 
 
