@@ -151,7 +151,7 @@ END;
 
 /
 
-CREATE OR REPLACE PROCEDURE REPORTE6 (cursorReporte OUT SYS_REFCURSOR)
+CREATE OR REPLACE PROCEDURE REPORTE6 (cursorReporte OUT SYS_REFCURSOR, fecha_mes IN DATE, categoria_servicio VARCHAR2)
 AS
 BEGIN
     OPEN cursorReporte FOR
@@ -183,6 +183,9 @@ BEGIN
         GROUP BY s.SER_NOMBRE, to_char(c.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
         ORDER BY to_char(c.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
     ) subg ON (subg.id_paq = car.SER_ID AND subg.fecha = to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY'))
+
+    WHERE((ser.SER_NOMBRE = categoria_servicio OR categoria_servicio IS NULL) AND
+          (to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')) = to_char(fecha_mes, 'MONTH YYYY') OR fecha_mes IS NULL)
 
     GROUP BY ser.SER_NOMBRE, to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
     ORDER BY to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY');
