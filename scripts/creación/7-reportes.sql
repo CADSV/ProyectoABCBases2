@@ -147,3 +147,48 @@ BEGIN
             (pg.pag_dispositivo = nombre_disp OR nombre_disp IS NULL)
         ORDER BY pa.paq_fecha.fecha_inicio;
 END;
+
+
+/
+
+CREATE OR REPLACE PROCEDURE REPORTE6 (cursorReporte OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN cursorReporte FOR
+        SELECT
+        to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY') "Mes",
+        LISTAGG(DISTINCT ser.SER_NOMBRE, '') "Categoría de Servicio",
+        LISTAGG(DISTINCT CONCAT(ROUND(subg.cant_serv*100/subg.cant_ser_mes,2),'%'),'') "% Demanda del Servicio",
+        COUNT(car.SER_ID) "Cantidad de clientes que lo han solicitado"
+
+    FROM SERVICIO ser
+    INNER JOIN CARACTERISTICA car on ser.SER_ID = car.SER_ID
+    INNER JOIN (
+        SELECT
+            COUNT(c.SER_ID) as cant_serv,
+            LISTAGG(DISTINCT c.SER_ID, '') as id_paq,
+            to_char(c.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY') as fecha,
+            LISTAGG(DISTINCT sub.cant_mes) as cant_ser_mes
+        FROM SERVICIO s
+        INNER JOIN CARACTERISTICA c ON s.SER_ID = c.SER_ID
+
+        INNER JOIN (
+        SELECT
+            to_char(carec.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY') as mes,
+            COUNT(carec.SER_ID)  as cant_mes
+        FROM CARACTERISTICA carec
+        GROUP BY to_char(carec.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
+        ) sub ON sub.mes = to_char(c.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
+
+        GROUP BY s.SER_NOMBRE, to_char(c.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
+        ORDER BY to_char(c.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
+    ) subg ON (subg.id_paq = car.SER_ID AND subg.fecha = to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY'))
+
+    GROUP BY ser.SER_NOMBRE, to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
+    ORDER BY to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY');
+END;
+
+
+
+
+
