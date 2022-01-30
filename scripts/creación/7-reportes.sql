@@ -297,6 +297,7 @@ BEGIN
             GROUP BY to_char(pa.PAG_FECHA, 'MONTH YYYY'), pa.PAG_CANAL
         ) subg ON ((subg.nombre_canal = pag.PAG_CANAL) AND (subg.fecha = to_char(pag.PAG_FECHA, 'MONTH YYYY')))
 
+        WHERE to_char(pag.PAG_FECHA, 'MONTH YYYY') = to_char(fecha_mes, 'MONTH YYYY') OR fecha_mes IS NULL
         group by to_char(pag.PAG_FECHA, 'MONTH YYYY')
         ORDER BY to_char(pag.PAG_FECHA,'MONTH YYYY');
 
