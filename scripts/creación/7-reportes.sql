@@ -194,5 +194,42 @@ END;
 
 
 
+    CREATE OR REPLACE PROCEDURE REPORTE8 (cursorReporte OUT SYS_REFCURSOR, fecha_mes IN DATE)
+AS
+BEGIN
+    OPEN cursorReporte FOR
+       SELECT
+            to_char(pag.PAG_FECHA, 'MONTH YYYY') "Mes",
+            LISTAGG(DISTINCT '* '|| med.MED_NOMBRE || ROUND(subg.cant_medio*100/subg.cant_mes,2) ||'%', chr(13) || chr(10) ) WITHIN GROUP (ORDER BY med.MED_NOMBRE) "Medio de pago y porcentaje del mismo"
 
+        FROM PAGO pag
+        INNER JOIN MEDIO_PAGO med ON pag.PAG_ID = med.PAG_ID
 
+        INNER JOIN (
+            SELECT
+                count(m.MED_ID) as cant_medio,
+                m.MED_NOMBRE as nombre_medio,
+                LISTAGG(DISTINCT sub.mes) as fecha,
+                LISTAGG(DISTINCT sub.total_medio_mes) as cant_mes
+
+            FROM MEDIO_PAGO m
+            INNER JOIN PAGO p on p.PAG_ID = m.PAG_ID
+            INNER JOIN (
+                    SELECT
+                        count(me.MED_ID) as total_medio_mes,
+                        to_char(pa.PAG_FECHA, 'MONTH YYYY') as mes
+
+                    FROM MEDIO_PAGO me
+                    INNER JOIN PAGO pa on pa.PAG_ID = me.PAG_ID
+                    GROUP BY to_char(pa.PAG_FECHA, 'MONTH YYYY')
+                ) sub ON sub.mes = to_char(p.PAG_FECHA, 'MONTH YYYY')
+
+        GROUP BY to_char(p.PAG_FECHA, 'MONTH YYYY'), m.MED_NOMBRE
+    ) subg ON (subg.nombre_medio = med.MED_NOMBRE AND subg.fecha = to_char(pag.PAG_FECHA, 'MONTH YYYY'))
+
+        WHERE to_char(pag.PAG_FECHA, 'MONTH YYYY') = to_char(fecha_mes, 'MONTH YYYY') OR fecha_mes IS NULL
+
+        GROUP BY to_char(pag.PAG_FECHA, 'MONTH YYYY')
+        ORDER BY to_char(pag.PAG_FECHA, 'MONTH YYYY');
+
+END;
