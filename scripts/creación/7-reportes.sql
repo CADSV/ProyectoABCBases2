@@ -263,3 +263,42 @@ BEGIN
         ORDER BY ven.VEN_FECHA ;
 
 END;
+
+/
+
+
+
+   CREATE OR REPLACE PROCEDURE REPORTE12 (cursorReporte OUT SYS_REFCURSOR, fecha_mes IN DATE)
+AS
+BEGIN
+    OPEN cursorReporte FOR
+        SELECT
+            to_char(pag.PAG_FECHA, 'MONTH YYYY') "Mes",
+            LISTAGG(DISTINCT '* '|| PAG.PAG_CANAL || ROUND(subg.cant_por_canal*100/subg.cant_mensual,2) ||'%', chr(13) || chr(10) ) WITHIN GROUP (ORDER BY pag.PAG_CANAL) "Canal utilizado para las ventas"
+
+        FROM PAGO pag
+        INNER JOIN(
+            SELECT
+                COUNT(pa.PAG_CANAL) as cant_por_canal,
+                pa.PAG_CANAL as nombre_canal,
+                LISTAGG(DISTINCT sub.mes, '') as fecha,
+                LISTAGG(DISTINCT sub.cant_mes,'') as cant_mensual
+
+            FROM PAGO pa
+            INNER JOIN (
+                SELECT
+                    to_char(p.PAG_FECHA, 'MONTH YYYY') as mes,
+                    COUNT(p.PAG_CANAL) as cant_mes
+
+                FROM PAGO p
+                GROUP BY to_char(p.PAG_FECHA, 'MONTH YYYY')
+            ) sub ON sub.mes = to_char(pa.PAG_FECHA, 'MONTH YYYY')
+
+            GROUP BY to_char(pa.PAG_FECHA, 'MONTH YYYY'), pa.PAG_CANAL
+        ) subg ON ((subg.nombre_canal = pag.PAG_CANAL) AND (subg.fecha = to_char(pag.PAG_FECHA, 'MONTH YYYY')))
+
+        group by to_char(pag.PAG_FECHA, 'MONTH YYYY')
+        ORDER BY to_char(pag.PAG_FECHA,'MONTH YYYY');
+
+END;
+
