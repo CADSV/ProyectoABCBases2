@@ -192,7 +192,7 @@ BEGIN
 
 END;
 
-
+/
 
     CREATE OR REPLACE PROCEDURE REPORTE8 (cursorReporte OUT SYS_REFCURSOR, fecha_mes IN DATE)
 AS
@@ -231,5 +231,35 @@ BEGIN
 
         GROUP BY to_char(pag.PAG_FECHA, 'MONTH YYYY')
         ORDER BY to_char(pag.PAG_FECHA, 'MONTH YYYY');
+
+END;
+
+/
+
+
+   CREATE OR REPLACE PROCEDURE REPORTE10 (cursorReporte OUT SYS_REFCURSOR, fecha_mes IN DATE)
+AS
+BEGIN
+    OPEN cursorReporte FOR
+        SELECT
+            to_char(ven.VEN_FECHA, 'MONTH YYYY') "Fecha",
+            emp.EMP_NOMBRE "Competencia",
+            emp.EMP_LOGO "Foto Logo",
+            NVL(subg.ventas_estrella,0) "Ventas Estrella Caribeña",
+            ven.VEN_CANTIDAD "Ventas de Competencia"
+
+        FROM EMPRESA emp
+        INNER JOIN COMPETIDOR comp ON emp.EMP_ID = comp.EMP_ID
+        INNER JOIN VENTA ven ON comp.EMP_ID = ven.EMP_ID
+        LEFT JOIN (
+            SELECT
+                COUNT(paq.PAQ_ID) as ventas_estrella,
+                to_char(paq.PAQ_FECHA.FECHA_INICIO, 'MONTH YYYY') as fecha
+            FROM PAQUETE_TURISTICO paq
+            GROUP BY to_char(paq.PAQ_FECHA.FECHA_INICIO, 'MONTH YYYY')
+        ) subg ON subg.fecha = to_char(ven.VEN_FECHA, 'MONTH YYYY')
+
+        WHERE to_char(ven.VEN_FECHA, 'MONTH YYYY') = to_char(fecha_mes, 'MONTH YYYY') OR fecha_mes IS NULL
+        ORDER BY ven.VEN_FECHA ;
 
 END;
