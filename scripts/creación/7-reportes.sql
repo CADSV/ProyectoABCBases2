@@ -151,6 +151,31 @@ END;
 
 /
 
+CREATE OR REPLACE PROCEDURE REPORTE5 (cursorReporte OUT SYS_REFCURSOR, fecha_ini IN DATE, fecha_f IN DATE, fecha_prox_mant IN DATE)
+AS
+BEGIN
+    OPEN cursorReporte FOR
+        SELECT 
+            'CRU-' || cr.tra_id "ID Crucero",
+            tr.tra_foto "Foto",
+            ma.man_fecha "Fecha mantenimiento",
+            cr.cru_mant.fecha_prox_mant "Fecha de próximo mantenimiento",
+            ma.man_descrip "Descripción mantenimiento",
+            '$ ' || ma.man_costo "Costo"
+        FROM MANTENIMIENTO ma
+        INNER JOIN TRANSPORTE tr
+            ON tr.tra_id = ma.tra_id
+        INNER JOIN CRUCERO cr
+            ON cr.tra_id = tr.tra_id
+        WHERE   
+            (TO_DATE(ma.man_fecha, 'DD-MM-YYYY') >= TO_DATE(fecha_ini, 'DD-MM-YYYY') OR fecha_ini IS NULL) AND
+            (TO_DATE(ma.man_fecha, 'DD-MM-YYYY') <= TO_DATE(fecha_f, 'DD-MM-YYYY') OR fecha_f IS NULL) AND
+            (TO_DATE(cr.cru_mant.fecha_prox_mant, 'DD-MM-YYYY') = TO_DATE(fecha_prox_mant, 'DD-MM-YYYY') OR fecha_prox_mant IS NULL)
+        ORDER BY ma.man_fecha, cr.cru_mant.fecha_prox_mant;
+END;
+
+/
+
 CREATE OR REPLACE PROCEDURE REPORTE6 (cursorReporte OUT SYS_REFCURSOR, fecha_mes IN DATE, categoria_servicio VARCHAR2)
 AS
 BEGIN
@@ -190,6 +215,54 @@ BEGIN
     GROUP BY ser.SER_NOMBRE, to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
     ORDER BY to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY');
 
+END;
+
+/
+
+CREATE OR REPLACE PROCEDURE REPORTE7 (cursorReporte OUT SYS_REFCURSOR, cat_ser IN VARCHAR2, mesesano IN DATE)
+AS
+    fecha_min DATE;
+    fecha_max DATE;
+BEGIN
+    -- Obtener mínima y máxima fecha de compra (inicio de paquete)
+    SELECT MIN(pa.paq_fecha.fecha_inicio)
+    INTO fecha_min
+    FROM PAQUETE_TURISTICO pa;
+
+    SELECT MAX(pa.paq_fecha.fecha_inicio)
+    INTO fecha_max
+    FROM PAQUETE_TURISTICO pa;
+
+    OPEN cursorReporte FOR
+        SELECT  
+            mesano "Mes",  
+            sernom "Categoría de Servicio",   
+            '$ ' || gastos "Costos directos e indirectos (gastos)",   
+            '$ ' || (paquetes * precio) "Ingresos recibidos por el servicio",   
+            '$ ' || ((paquetes * precio) - gastos) "Ganancia"  
+        FROM  
+            (SELECT     
+                to_char(mes,'Month YYYY') AS mesano,  
+                se.ser_nombre AS sernom,   
+                SUM(se.ser_costo_mensual) AS gastos,   
+                SUM(se.ser_precio_unitario) AS precio,  
+                COUNT(pa.paq_id) AS paquetes  
+            FROM   
+                (SELECT   
+                    add_months(trunc(to_date(fecha_min), 'month'), level-1) mes  
+                FROM dual   
+                CONNECT BY LEVEL <= floor(MONTHS_BETWEEN(fecha_max,fecha_min)))  
+            LEFT JOIN PAQUETE_TURISTICO pa   
+                ON mes = trunc(pa.paq_fecha.fecha_inicio, 'month') 
+            INNER JOIN CARACTERISTICA ca    
+                ON ca.paq_id = pa.paq_id 
+            INNER JOIN SERVICIO se   
+                ON se.ser_id = ca.ser_id       
+            WHERE   
+                ((mes = trunc((to_date(mesesano)),'month')) OR mesesano IS NULL) AND -- Convierte la fecha a la fecha del primer día de su mes  
+                ((LOWER(se.ser_nombre) = LOWER(cat_ser)) OR cat_ser IS NULL) 
+            GROUP BY mes, se.ser_nombre  
+            ORDER BY mes, - SUM(se.ser_precio_unitario) * COUNT(pa.paq_id) + SUM(se.ser_costo_mensual));
 END;
 
 /
@@ -236,6 +309,27 @@ END;
 
 /
 
+CREATE OR REPLACE PROCEDURE REPORTE9 (cursorReporte OUT SYS_REFCURSOR, fecha_ini IN DATE, fecha_f IN DATE)
+AS
+BEGIN
+    OPEN cursorReporte FOR
+        SELECT 
+            al.ali_fecha.fecha_inicio,
+            em.emp_nombre,
+            em.emp_logo,
+            al.ali_foto
+        FROM ALIANZA al
+        INNER JOIN PROVEEDOR pr
+            ON pr.emp_id = al.emp_id
+        INNER JOIN EMPRESA em
+            ON em.emp_id = pr.emp_id
+        WHERE   
+            (TO_DATE(al.ali_fecha.fecha_inicio, 'DD-MM-YYYY') >= TO_DATE(fecha_ini, 'DD-MM-YYYY') OR fecha_ini IS NULL) AND
+            (TO_DATE(al.ali_fecha.fecha_inicio, 'DD-MM-YYYY') <= TO_DATE(fecha_f, 'DD-MM-YYYY') OR fecha_f IS NULL)
+        ORDER BY al.ali_fecha.fecha_inicio,em.emp_nombre;
+END;
+
+/
 
    CREATE OR REPLACE PROCEDURE REPORTE10 (cursorReporte OUT SYS_REFCURSOR, fecha_mes IN DATE)
 AS
@@ -266,7 +360,55 @@ END;
 
 /
 
+CREATE OR REPLACE PROCEDURE REPORTE11 (cursorReporte OUT SYS_REFCURSOR, mesesano IN DATE, nom_pais IN VARCHAR2)
+AS
+    fecha_min DATE;
+    fecha_max DATE;
+BEGIN
+    -- Obtener mínima y máxima fecha de compra (inicio de paquete)
+    SELECT MIN(pa.paq_fecha.fecha_inicio)
+    INTO fecha_min
+    FROM PAQUETE_TURISTICO pa;
 
+    SELECT MAX(pa.paq_fecha.fecha_inicio)
+    INTO fecha_max
+    FROM PAQUETE_TURISTICO pa;
+
+    -- Debemos obtener la bandera por fuera ya que no se puede agrupar por BLOB
+    OPEN cursorReporte FOR
+        SELECT  
+            mesano "Fecha",  
+            pi.pai_bandera "Foto País",   
+            paisnom "País",   
+            unicom "Unidades compradas"  
+        FROM 
+                (SELECT     
+                    to_char(mes,'Month YYYY') mesano,   
+                    pi.pai_nombre paisnom,   
+                    COUNT(pa.paq_id) unicom 
+                FROM   
+                    (SELECT   
+                        add_months(trunc(to_date(fecha_min), 'month'), level-1) mes  
+                    FROM dual   
+                    CONNECT BY LEVEL <= floor(MONTHS_BETWEEN(fecha_max,fecha_min))) 
+                LEFT JOIN PAQUETE_TURISTICO pa   
+                    ON mes = trunc(pa.paq_fecha.fecha_inicio, 'month') 
+                INNER JOIN PAGO pg   
+                    ON pg.pag_id = pa.pag_id   
+                INNER JOIN CLIENTE cl  
+                    ON cl.cli_id = pg.cli_id  
+                INNER JOIN PAIS pi  
+                    ON pi.pai_id = cl.pai_id 
+                WHERE
+                    ((mes = trunc((to_date(mesesano)),'month')) OR mesesano IS NULL) AND -- Convierte la fecha a la fecha del primer día de su mes
+                    ((LOWER(nom_pais) = LOWER(pi.pai_nombre)) OR nom_pais IS NULL)
+                GROUP BY mes,pi.pai_nombre) 
+        INNER JOIN PAIS pi 
+            ON pi.pai_nombre = paisnom 
+        ORDER BY mesano,paisnom;
+END;
+
+/
 
    CREATE OR REPLACE PROCEDURE REPORTE12 (cursorReporte OUT SYS_REFCURSOR, fecha_mes IN DATE)
 AS
@@ -303,3 +445,54 @@ BEGIN
 
 END;
 
+/
+
+CREATE OR REPLACE PROCEDURE REPORTE13 (cursorReporte OUT SYS_REFCURSOR, mesesano IN DATE, escalacara IN VARCHAR2)
+AS
+    fecha_min DATE;
+    fecha_max DATE;
+BEGIN
+    -- Obtener mínima y máxima fecha de observacion
+    SELECT MIN(ob.obs_fecha)
+    INTO fecha_min
+    FROM OBSERVACION ob;
+
+    SELECT MAX(ob.obs_fecha)
+    INTO fecha_max
+    FROM OBSERVACION ob;
+
+    OPEN cursorReporte FOR
+        SELECT
+            mesano "Mes", 
+            catser "Categoría de Servicio",
+            escal "Escala de Calificación",
+            obser "Observaciones"
+        FROM
+            (SELECT      
+                to_char(mes,'Month YYYY') mesano, 
+                se.ser_nombre catser,
+                CASE -- Convertir promedio de calificaciones en carita
+                    WHEN (AVG(ob.obs_calif)) <= 1.5
+                        THEN ':('
+                    WHEN (AVG(ob.obs_calif)) > 1.5 AND (AVG(ob.obs_calif)) < 2.5
+                        THEN ':|'
+                    WHEN (AVG(ob.obs_calif)) >= 2.5
+                        THEN ':)'
+                    END escal,
+                -- ROUND(AVG(ob.obs_calif)) "Escala de Calificación",
+                LISTAGG(DISTINCT '- ' || ob.obs_texto, chr(13) || chr(10)) WITHIN GROUP (ORDER BY ob.obs_texto) obser
+            FROM   
+                (SELECT   
+                    add_months(trunc(to_date(fecha_min), 'month'), level-1) mes  
+                FROM dual   
+                CONNECT BY LEVEL <= floor(MONTHS_BETWEEN(fecha_max,fecha_min))) 
+            LEFT JOIN OBSERVACION ob   
+                ON mes = trunc(ob.obs_fecha, 'month') 
+            INNER JOIN SERVICIO se   
+                ON se.ser_id = ob.ser_id   
+            GROUP BY mes,se.ser_nombre
+            ORDER BY mes,se.ser_nombre)
+        WHERE
+            ((mesano = trunc((to_date(mesesano)),'month')) OR mesesano IS NULL) AND -- Convierte la fecha a la fecha del primer día de su mes
+            ((escalacara = escal) OR escalacara IS NULL);
+END;
