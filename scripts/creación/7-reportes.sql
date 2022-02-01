@@ -180,41 +180,46 @@ CREATE OR REPLACE PROCEDURE REPORTE6 (cursorReporte OUT SYS_REFCURSOR, fecha_mes
 AS
 BEGIN
     OPEN cursorReporte FOR
-        SELECT
-        to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY') "Mes",
-        LISTAGG(DISTINCT ser.SER_NOMBRE, '') "Categoría de Servicio",
-        LISTAGG(DISTINCT CONCAT(ROUND(subg.cant_serv*100/subg.cant_ser_mes,2),'%'),'') "% Demanda del Servicio",
-        COUNT(car.SER_ID) "Cantidad de clientes que lo han solicitado"
-
-    FROM SERVICIO ser
-    INNER JOIN CARACTERISTICA car on ser.SER_ID = car.SER_ID
-    INNER JOIN (
-        SELECT
-            COUNT(c.SER_ID) as cant_serv,
-            LISTAGG(DISTINCT c.SER_ID, '') as id_paq,
-            to_char(c.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY') as fecha,
-            LISTAGG(DISTINCT sub.cant_mes) as cant_ser_mes
-        FROM SERVICIO s
-        INNER JOIN CARACTERISTICA c ON s.SER_ID = c.SER_ID
-
+    SELECT
+        mesano "Mes",
+        catser "Categoría de Servicio",
+        deman "% Demanda del Servicio",
+        cantid "Cantidad de clientes que lo han solicitado"  
+    FROM
+        (SELECT
+            to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY') mesano,
+            LISTAGG(DISTINCT ser.SER_NOMBRE, '') catser,
+            LISTAGG(DISTINCT CONCAT(ROUND(subg.cant_serv*100/subg.cant_ser_mes,2),'%'),'') deman,
+            COUNT(car.SER_ID) cantid
+        FROM SERVICIO ser
+        INNER JOIN CARACTERISTICA car on ser.SER_ID = car.SER_ID
         INNER JOIN (
-        SELECT
-            to_char(carec.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY') as mes,
-            COUNT(carec.SER_ID)  as cant_mes
-        FROM CARACTERISTICA carec
-        GROUP BY to_char(carec.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
-        ) sub ON sub.mes = to_char(c.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
+            SELECT
+                COUNT(c.SER_ID) as cant_serv,
+                LISTAGG(DISTINCT c.SER_ID, '') as id_paq,
+                to_char(c.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY') as fecha,
+                LISTAGG(DISTINCT sub.cant_mes) as cant_ser_mes
+            FROM SERVICIO s
+            INNER JOIN CARACTERISTICA c ON s.SER_ID = c.SER_ID
 
-        GROUP BY s.SER_NOMBRE, to_char(c.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
-        ORDER BY to_char(c.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
-    ) subg ON (subg.id_paq = car.SER_ID AND subg.fecha = to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY'))
+            INNER JOIN (
+            SELECT
+                to_char(carec.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY') as mes,
+                COUNT(carec.SER_ID)  as cant_mes
+            FROM CARACTERISTICA carec
+            GROUP BY to_char(carec.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
+            ) sub ON sub.mes = to_char(c.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
 
-    WHERE((ser.SER_NOMBRE = categoria_servicio OR categoria_servicio IS NULL) AND
-          (to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')) = to_char(fecha_mes, 'MONTH YYYY') OR fecha_mes IS NULL)
+            GROUP BY s.SER_NOMBRE, to_char(c.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
+            ORDER BY to_char(c.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
+        ) subg ON (subg.id_paq = car.SER_ID AND subg.fecha = to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY'))
 
-    GROUP BY ser.SER_NOMBRE, to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
-    ORDER BY to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY');
-
+        GROUP BY ser.SER_NOMBRE, to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY')
+        ORDER BY to_char(car.CAR_FECHA.FECHA_INICIO, 'MONTH YYYY'))
+        
+        WHERE
+            ((LOWER(catser) = LOWER(categoria_servicio)) OR categoria_servicio IS NULL) AND
+            (mesano = to_char(fecha_mes, 'MONTH YYYY') OR fecha_mes IS NULL);
 END;
 
 /
@@ -239,7 +244,9 @@ BEGIN
             sernom "Categoría de Servicio",   
             '$ ' || gastos "Costos directos e indirectos (gastos)",   
             '$ ' || (paquetes * precio) "Ingresos recibidos por el servicio",   
-            '$ ' || ((paquetes * precio) - gastos) "Ganancia"  
+            '$ ' || ((paquetes * precio) - gastos) "Ganancia",
+            gastos gastosgraf,
+            (paquetes * precio) ingresosgraf
         FROM  
             (SELECT     
                 to_char(mes,'Month YYYY') AS mesano,  
@@ -314,10 +321,10 @@ AS
 BEGIN
     OPEN cursorReporte FOR
         SELECT 
-            al.ali_fecha.fecha_inicio,
-            em.emp_nombre,
-            em.emp_logo,
-            al.ali_foto
+            al.ali_fecha.fecha_inicio "Fecha inicio alianza",
+            em.emp_nombre "Nombre Proveedor",
+            em.emp_logo "Logo",
+            al.ali_foto "Foto"
         FROM ALIANZA al
         INNER JOIN PROVEEDOR pr
             ON pr.emp_id = al.emp_id
@@ -331,7 +338,7 @@ END;
 
 /
 
-   CREATE OR REPLACE PROCEDURE REPORTE10 (cursorReporte OUT SYS_REFCURSOR, fecha_mes IN DATE)
+CREATE OR REPLACE PROCEDURE REPORTE10 (cursorReporte OUT SYS_REFCURSOR, fecha_mes IN DATE)
 AS
 BEGIN
     OPEN cursorReporte FOR
@@ -380,7 +387,7 @@ BEGIN
             mesano "Fecha",  
             pi.pai_bandera "Foto País",   
             paisnom "País",   
-            unicom "Unidades compradas"  
+            unicom || ' Unidades' "Unidades compradas"  
         FROM 
                 (SELECT     
                     to_char(mes,'Month YYYY') mesano,   
@@ -477,7 +484,7 @@ BEGIN
                     WHEN (AVG(ob.obs_calif)) > 1.5 AND (AVG(ob.obs_calif)) < 2.5
                         THEN ':|'
                     WHEN (AVG(ob.obs_calif)) >= 2.5
-                        THEN ':)'
+                        THEN ':-)'
                     END escal,
                 -- ROUND(AVG(ob.obs_calif)) "Escala de Calificación",
                 LISTAGG(DISTINCT '- ' || ob.obs_texto, chr(13) || chr(10)) WITHIN GROUP (ORDER BY ob.obs_texto) obser
