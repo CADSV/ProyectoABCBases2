@@ -500,6 +500,6 @@ BEGIN
             GROUP BY mes,se.ser_nombre
             ORDER BY mes,se.ser_nombre)
         WHERE
-            ((mesano = trunc((to_date(mesesano)),'month')) OR mesesano IS NULL) AND -- Convierte la fecha a la fecha del primer día de su mes
+            ((mesano = to_char(to_date(mesesano),'Month YYYY')) OR mesesano IS NULL) AND -- Convierte la fecha a la fecha del primer día de su mes
             ((escalacara = escal) OR escalacara IS NULL);
 END;
