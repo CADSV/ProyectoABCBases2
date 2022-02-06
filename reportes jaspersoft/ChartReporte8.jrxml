@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ChartRepote7Test" pageWidth="225" pageHeight="101" columnWidth="225" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b555b867-9f8c-4953-99ae-028d1d7b873e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="JDBC Oracle Local"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="Meses_del_Ano" class="java.sql.Date"/>
+	<queryString language="plsql">
+		<![CDATA[{call GRAFICA_REPORTE8($P{ORACLE_REF_CURSOR},$P{Meses_del_Ano})}]]>
+	</queryString>
+	<field name="Mes" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Mes"/>
+		<property name="com.jaspersoft.studio.field.label" value="Mes"/>
+	</field>
+	<field name="MED_NOMBRE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MED_NOMBRE"/>
+		<property name="com.jaspersoft.studio.field.label" value="MED_NOMBRE"/>
+	</field>
+	<field name="SUM(ROUND(SUBG.CANT_MEDIO*100/SUBG.CANT_MES,2))" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="SUM(ROUND(SUBG.CANT_MEDIO*100/SUBG.CANT_MES,2))"/>
+		<property name="com.jaspersoft.studio.field.label" value="SUM(ROUND(SUBG.CANT_MEDIO*100/SUBG.CANT_MES,2))"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="101" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="0" y="0" width="225" height="101" uuid="66f1beed-b4b5-4dbc-8b74-6e8ffe1e80e1">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<chartTitle>
+						<font size="6"/>
+						<titleExpression><![CDATA["Plataformas de Pago"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle>
+						<font size="10"/>
+					</chartSubtitle>
+					<chartLegend>
+						<font size="5"/>
+					</chartLegend>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report"/>
+					<keyExpression><![CDATA[$F{MED_NOMBRE}]]></keyExpression>
+					<valueExpression><![CDATA[$F{SUM(ROUND(SUBG.CANT_MEDIO*100/SUBG.CANT_MES,2))}]]></valueExpression>
+					<labelExpression><![CDATA[$F{MED_NOMBRE}]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</title>
+</jasperReport>
