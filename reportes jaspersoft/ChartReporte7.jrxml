@@ -49,7 +49,7 @@
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<pieChart>
 				<chart evaluationTime="Report">
-					<reportElement x="0" y="0" width="164" height="101" uuid="e1eb4af4-9b26-49d7-a569-e15472015faf">
+					<reportElement x="0" y="0" width="164" height="101" uuid="be7e8b8e-8a82-49c1-856e-faca53dde9a1">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
@@ -75,12 +75,12 @@
 					<pieSeries>
 						<keyExpression><![CDATA["Gastos"]]></keyExpression>
 						<valueExpression><![CDATA[$F{GASTOSGRAF}]]></valueExpression>
-						<labelExpression><![CDATA["Gastos"]]></labelExpression>
+						<labelExpression><![CDATA[$F{GASTOSGRAF} + "%"]]></labelExpression>
 					</pieSeries>
 					<pieSeries>
 						<keyExpression><![CDATA["Ingresos"]]></keyExpression>
 						<valueExpression><![CDATA[$F{INGRESOSGRAF}]]></valueExpression>
-						<labelExpression><![CDATA["Ingresos"]]></labelExpression>
+						<labelExpression><![CDATA[$F{INGRESOSGRAF} + "%"]]></labelExpression>
 					</pieSeries>
 				</pieDataset>
 				<piePlot>
