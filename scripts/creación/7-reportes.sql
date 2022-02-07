@@ -254,7 +254,7 @@ BEGIN
                 se.ser_nombre AS sernom,   
                 SUM(se.ser_costo_mensual) AS gastos,   
                 SUM(se.ser_precio_unitario) AS precio,  
-                COUNT(pa.paq_id) AS paquetes  
+                COUNT(pa.paq_id) AS paquetes,  
                 mes
             FROM   
                 (SELECT   
