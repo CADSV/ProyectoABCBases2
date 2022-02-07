@@ -224,7 +224,7 @@ END;
 
 /
 
-CREATE OR REPLACE PROCEDURE REPORTE7 (cursorReporte OUT SYS_REFCURSOR, cat_ser IN VARCHAR2, mesesano IN DATE)
+create or replace PROCEDURE REPORTE7 (cursorReporte OUT SYS_REFCURSOR, cat_ser IN VARCHAR2, mesesano IN DATE)
 AS
     fecha_min DATE;
     fecha_max DATE;
@@ -254,7 +254,7 @@ BEGIN
                 se.ser_nombre AS sernom,   
                 SUM(se.ser_costo_mensual) AS gastos,   
                 SUM(se.ser_precio_unitario) AS precio,  
-                COUNT(pa.paq_id) AS paquetes  
+                COUNT(pa.paq_id) AS paquetes,
                 mes
             FROM   
                 (SELECT   
