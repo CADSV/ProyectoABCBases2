@@ -224,7 +224,7 @@ END;
 
 /
 
-CREATE OR REPLACE PROCEDURE REPORTE7 (cursorReporte OUT SYS_REFCURSOR, cat_ser IN VARCHAR2, mesesano IN DATE)
+create or replace PROCEDURE REPORTE7 (cursorReporte OUT SYS_REFCURSOR, cat_ser IN VARCHAR2, mesesano IN DATE)
 AS
     fecha_min DATE;
     fecha_max DATE;
