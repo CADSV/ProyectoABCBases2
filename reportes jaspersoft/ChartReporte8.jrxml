@@ -20,13 +20,13 @@
 		<property name="com.jaspersoft.studio.field.name" value="Mes"/>
 		<property name="com.jaspersoft.studio.field.label" value="Mes"/>
 	</field>
-	<field name="MED_NOMBRE" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="MED_NOMBRE"/>
-		<property name="com.jaspersoft.studio.field.label" value="MED_NOMBRE"/>
+	<field name="NOMBREGRAF" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NOMBREGRAF"/>
+		<property name="com.jaspersoft.studio.field.label" value="NOMBREGRAF"/>
 	</field>
-	<field name="SUM(ROUND(SUBG.CANT_MEDIO*100/SUBG.CANT_MES,2))" class="java.math.BigDecimal">
-		<property name="com.jaspersoft.studio.field.name" value="SUM(ROUND(SUBG.CANT_MEDIO*100/SUBG.CANT_MES,2))"/>
-		<property name="com.jaspersoft.studio.field.label" value="SUM(ROUND(SUBG.CANT_MEDIO*100/SUBG.CANT_MES,2))"/>
+	<field name="MONTOGRAF" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="MONTOGRAF"/>
+		<property name="com.jaspersoft.studio.field.label" value="MONTOGRAF"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -36,7 +36,7 @@
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<pieChart>
 				<chart evaluationTime="Report">
-					<reportElement x="0" y="0" width="225" height="101" uuid="66f1beed-b4b5-4dbc-8b74-6e8ffe1e80e1">
+					<reportElement x="0" y="0" width="225" height="101" uuid="08851a59-b241-478b-8099-067d6a37da1c">
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					</reportElement>
@@ -59,9 +59,9 @@
 				</chart>
 				<pieDataset>
 					<dataset resetType="Report"/>
-					<keyExpression><![CDATA[$F{MED_NOMBRE}]]></keyExpression>
-					<valueExpression><![CDATA[$F{SUM(ROUND(SUBG.CANT_MEDIO*100/SUBG.CANT_MES,2))}]]></valueExpression>
-					<labelExpression><![CDATA[$F{MED_NOMBRE}]]></labelExpression>
+					<keyExpression><![CDATA[$F{NOMBREGRAF}]]></keyExpression>
+					<valueExpression><![CDATA[$F{MONTOGRAF}]]></valueExpression>
+					<labelExpression><![CDATA[$F{MONTOGRAF} + "%"]]></labelExpression>
 				</pieDataset>
 				<piePlot>
 					<plot/>

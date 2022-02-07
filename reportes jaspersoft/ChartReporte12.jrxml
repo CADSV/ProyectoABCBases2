@@ -20,13 +20,13 @@
 		<property name="com.jaspersoft.studio.field.name" value="Mes"/>
 		<property name="com.jaspersoft.studio.field.label" value="Mes"/>
 	</field>
-	<field name="PAG_CANAL" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="PAG_CANAL"/>
-		<property name="com.jaspersoft.studio.field.label" value="PAG_CANAL"/>
+	<field name="NOMBREGRAF" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="NOMBREGRAF"/>
+		<property name="com.jaspersoft.studio.field.label" value="NOMBREGRAF"/>
 	</field>
-	<field name="SUM(ROUND(SUBG.CANT_POR_CANAL*100/SUBG.CANT_MENSUAL,2))/10" class="java.math.BigDecimal">
-		<property name="com.jaspersoft.studio.field.name" value="SUM(ROUND(SUBG.CANT_POR_CANAL*100/SUBG.CANT_MENSUAL,2))/10"/>
-		<property name="com.jaspersoft.studio.field.label" value="SUM(ROUND(SUBG.CANT_POR_CANAL*100/SUBG.CANT_MENSUAL,2))/10"/>
+	<field name="MONTOGRAF" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="MONTOGRAF"/>
+		<property name="com.jaspersoft.studio.field.label" value="MONTOGRAF"/>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
@@ -36,7 +36,7 @@
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<barChart>
 				<chart isShowLegend="false" evaluationTime="Report" theme="aegean">
-					<reportElement x="0" y="0" width="225" height="101" uuid="34718e35-8c01-4f7c-ae70-bda04b14f31c">
+					<reportElement x="0" y="0" width="225" height="101" uuid="d8ecb3cb-b191-4c5c-af76-7fa3d481e34a">
 						<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					</reportElement>
@@ -59,19 +59,19 @@
 					<dataset resetType="Report"/>
 					<categorySeries>
 						<seriesExpression><![CDATA["Canal"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{PAG_CANAL}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{SUM(ROUND(SUBG.CANT_POR_CANAL*100/SUBG.CANT_MENSUAL,2))/10}]]></valueExpression>
-						<labelExpression><![CDATA[$F{PAG_CANAL}]]></labelExpression>
+						<categoryExpression><![CDATA[$F{NOMBREGRAF}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{MONTOGRAF}]]></valueExpression>
+						<labelExpression><![CDATA[$F{NOMBREGRAF}]]></labelExpression>
 					</categorySeries>
 				</categoryDataset>
-				<barPlot isShowTickLabels="false" isShowTickMarks="true">
+				<barPlot isShowTickLabels="true" isShowTickMarks="true">
 					<plot orientation="Horizontal"/>
 					<itemLabel/>
 					<categoryAxisFormat>
 						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
 					</categoryAxisFormat>
 					<valueAxisFormat>
-						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" tickLabelMask="#'%'" axisLineColor="#000000"/>
 					</valueAxisFormat>
 				</barPlot>
 			</barChart>

@@ -174,7 +174,9 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{Mes}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont">
@@ -188,7 +190,9 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{Canal utilizado para las ventas}]]></textFieldExpression>
 			</textField>
 			<subreport>

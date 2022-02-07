@@ -245,8 +245,8 @@ BEGIN
             '$ ' || gastos "Costos directos e indirectos (gastos)",   
             '$ ' || (paquetes * precio) "Ingresos recibidos por el servicio",   
             '$ ' || ((paquetes * precio) - gastos) "Ganancia",
-            gastos gastosgraf,
-            (paquetes * precio) ingresosgraf,
+            ROUND((gastos/(gastos + (paquetes * precio)))*100,2) gastosgraf,
+            ROUND(((paquetes * precio)/(gastos + (paquetes * precio)))*100,2) ingresosgraf,
             mes fechagraf
         FROM  
             (SELECT     
@@ -322,39 +322,39 @@ CREATE OR REPLACE PROCEDURE GRAFICA_REPORTE8 (cursorReporte OUT SYS_REFCURSOR, f
 AS
 BEGIN
     OPEN cursorReporte FOR
-        SELECT 
-            to_char(pag.PAG_FECHA, 'MONTH YYYY') "Mes", 
-            med.MED_NOMBRE, 
-            SUM(ROUND(subg.cant_medio*100/subg.cant_mes,2)) 
+        SELECT   
+            to_char(pag.PAG_FECHA, 'MONTH YYYY') "Mes",   
+            med.MED_NOMBRE nombregraf,   
+            TO_NUMBER(LISTAGG(DISTINCT ROUND(subg.cant_medio*100/subg.cant_mes,2))) montograf  
  
-        FROM PAGO pag 
-        INNER JOIN MEDIO_PAGO med ON pag.PAG_ID = med.PAG_ID 
+        FROM PAGO pag   
+        INNER JOIN MEDIO_PAGO med ON pag.PAG_ID = med.PAG_ID   
  
-        INNER JOIN ( 
-            SELECT 
-                count(m.MED_ID) as cant_medio, 
-                m.MED_NOMBRE as nombre_medio, 
-                LISTAGG(DISTINCT sub.mes) as fecha, 
-                LISTAGG(DISTINCT sub.total_medio_mes) as cant_mes 
+        INNER JOIN (   
+            SELECT   
+                count(m.MED_ID) as cant_medio,   
+                m.MED_NOMBRE as nombre_medio,   
+                LISTAGG(DISTINCT sub.mes) as fecha,   
+                LISTAGG(DISTINCT sub.total_medio_mes) as cant_mes   
  
-            FROM MEDIO_PAGO m 
-            INNER JOIN PAGO p on p.PAG_ID = m.PAG_ID 
-            INNER JOIN ( 
-                    SELECT 
-                        count(me.MED_ID) as total_medio_mes, 
-                        to_char(pa.PAG_FECHA, 'MONTH YYYY') as mes 
+            FROM MEDIO_PAGO m   
+            INNER JOIN PAGO p on p.PAG_ID = m.PAG_ID   
+            INNER JOIN (   
+                    SELECT   
+                        count(me.MED_ID) as total_medio_mes,   
+                        to_char(pa.PAG_FECHA, 'MONTH YYYY') as mes   
  
-                    FROM MEDIO_PAGO me 
-                    INNER JOIN PAGO pa on pa.PAG_ID = me.PAG_ID 
-                    GROUP BY to_char(pa.PAG_FECHA, 'MONTH YYYY') 
-                ) sub ON sub.mes = to_char(p.PAG_FECHA, 'MONTH YYYY') 
+                    FROM MEDIO_PAGO me   
+                    INNER JOIN PAGO pa on pa.PAG_ID = me.PAG_ID   
+                    GROUP BY to_char(pa.PAG_FECHA, 'MONTH YYYY')   
+                ) sub ON sub.mes = to_char(p.PAG_FECHA, 'MONTH YYYY')   
  
-            GROUP BY to_char(p.PAG_FECHA, 'MONTH YYYY'), m.MED_NOMBRE 
-        ) subg ON (subg.nombre_medio = med.MED_NOMBRE AND subg.fecha = to_char(pag.PAG_FECHA, 'MONTH YYYY')) 
-
-        WHERE to_char(pag.PAG_FECHA, 'MONTH YYYY') = to_char(fecha_mes, 'MONTH YYYY') OR fecha_mes IS NULL
-
-        GROUP BY to_char(pag.PAG_FECHA, 'MONTH YYYY'),med.MED_NOMBRE 
+            GROUP BY to_char(p.PAG_FECHA, 'MONTH YYYY'), m.MED_NOMBRE   
+        ) subg ON (subg.nombre_medio = med.MED_NOMBRE AND subg.fecha = to_char(pag.PAG_FECHA, 'MONTH YYYY'))   
+ 
+        WHERE to_char(pag.PAG_FECHA, 'MONTH YYYY') = to_char(fecha_mes, 'MONTH YYYY') OR fecha_mes IS NULL  
+ 
+        GROUP BY to_char(pag.PAG_FECHA, 'MONTH YYYY'),med.MED_NOMBRE,subg.cant_mes   
         ORDER BY to_char(pag.PAG_FECHA, 'MONTH YYYY');
 END;
 
@@ -505,9 +505,9 @@ BEGIN
     OPEN cursorReporte FOR
         SELECT 
             to_char(pag.PAG_FECHA, 'MONTH YYYY') "Mes", 
-            PAG.PAG_CANAL, 
-            SUM(ROUND(subg.cant_por_canal*100/subg.cant_mensual,2)) 
- 
+            PAG.PAG_CANAL nombregraf, 
+            TO_NUMBER(LISTAGG(DISTINCT ROUND(subg.cant_por_canal*100/subg.cant_mensual,2))) montograf
+
         FROM PAGO pag 
         INNER JOIN( 
             SELECT 
@@ -530,7 +530,7 @@ BEGIN
         ) subg ON ((subg.nombre_canal = pag.PAG_CANAL) AND (subg.fecha = to_char(pag.PAG_FECHA, 'MONTH YYYY'))) 
  
         WHERE to_char(pag.PAG_FECHA, 'MONTH YYYY') = to_char(fecha_mes, 'MONTH YYYY') OR fecha_mes IS NULL 
-        group by to_char(pag.PAG_FECHA, 'MONTH YYYY'), PAG.PAG_CANAL 
+        group by to_char(pag.PAG_FECHA, 'MONTH YYYY'), PAG.PAG_CANAL, subg.cant_mensual
         ORDER BY to_char(pag.PAG_FECHA,'MONTH YYYY');
 END;
 
